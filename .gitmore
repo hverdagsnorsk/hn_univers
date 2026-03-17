@@ -1,0 +1,15 @@
+.env
+hn_core/.env
+*.log
+.DS_Store
+
+node_modules/
+vendor/
+
+cache/
+tmp/
+logs/
+uploads/
+runtime/
+
+.gitkeep

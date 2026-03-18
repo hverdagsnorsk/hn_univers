@@ -15,7 +15,7 @@ define('HN_ROOT', dirname(HN_CORE_ROOT));
 
 require_once HN_CORE_ROOT.'/inc/env.php';
 
-$envPath = HN_ROOT.'/config/.env';
+$envPath = getenv('HOME').'/www/.env';
 
 hn_load_env($envPath);
 
@@ -28,4 +28,51 @@ function env(string $key, bool $required=true): ?string
     }
 
     return $value;
+}
+require_once HN_CORE_ROOT.'/services/database/db.php';
+
+$databases = [
+
+    'main'    => 'DB_MAIN',
+    'lex'     => 'DB_LEX',
+    'grammar' => 'DB_GRAMMAR',
+    'courses' => 'DB_COURSES'
+
+];
+
+foreach ($databases as $key => $prefix) {
+
+    try {
+
+        $host = env($prefix.'_HOST',false);
+        $name = env($prefix.'_NAME',false);
+        $user = env($prefix.'_USER',false);
+        $pass = env($prefix.'_PASS',false);
+
+        if ($host && $name && $user) {
+
+            $pdo = hn_pdo($host,$name,$user,$pass ?? '');
+
+            DB::set($key,$pdo);
+
+        }
+
+    } catch (Throwable $e) {
+
+        error_log("HN DB connection failed [$key]: ".$e->getMessage());
+
+    }
+
+}
+require_once HN_CORE_ROOT.'/services/cache/cache.php';
+
+function cache(): HNCache
+{
+    static $cache;
+
+    if(!$cache){
+        $cache = new HNCache();
+    }
+
+    return $cache;
 }

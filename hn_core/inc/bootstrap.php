@@ -76,3 +76,15 @@ function cache(): HNCache
 
     return $cache;
 }
+require_once HN_CORE_ROOT.'/services/ai/ai.php';
+
+function ai(): HNAI
+{
+    static $ai;
+
+    if(!$ai){
+        $ai = new HNAI();
+    }
+
+    return $ai;
+}

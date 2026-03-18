@@ -43,6 +43,12 @@ class HNAI
 
     public function complete(string $prompt): string
     {
+        $cacheKey = 'ai_' . md5($prompt);
+
+        if (cache()->has($cacheKey)) {
+            return cache()->get($cacheKey);
+        }
+
         $payload = [
 
             'model' => $this->model,
@@ -57,7 +63,10 @@ class HNAI
 
         $data = $this->request($payload);
 
-        return $data['choices'][0]['message']['content'] ?? '';
+        $result = $data['choices'][0]['message']['content'] ?? '';
+
+        cache()->set($cacheKey, $result, 3600);
+
+        return $result;
     }
 }
-

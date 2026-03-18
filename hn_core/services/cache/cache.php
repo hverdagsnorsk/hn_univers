@@ -7,17 +7,31 @@ class HNCache
 
     public function get(string $key)
     {
-        return $this->cache[$key] ?? null;
+        if (!isset($this->cache[$key])) {
+            return null;
+        }
+
+        $entry = $this->cache[$key];
+
+        if ($entry['expires'] !== null && $entry['expires'] < time()) {
+            unset($this->cache[$key]);
+            return null;
+        }
+
+        return $entry['value'];
     }
 
-    public function set(string $key, $value): void
+    public function set(string $key, $value, int $ttl = 0): void
     {
-        $this->cache[$key] = $value;
+        $this->cache[$key] = [
+            'value' => $value,
+            'expires' => $ttl > 0 ? time() + $ttl : null
+        ];
     }
 
     public function has(string $key): bool
     {
-        return isset($this->cache[$key]);
+        return $this->get($key) !== null;
     }
 
     public function clear(): void

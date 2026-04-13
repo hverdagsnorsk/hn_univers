@@ -1,0 +1,22 @@
+{
+  "title": "Preposisjoner",
+  "instruction": "Velg mellom i og på",
+  "options": ["i", "på"],
+  "tasks": [
+    {"q":"Jeg er ___ skolen.","correct":"på"},
+    {"q":"Barna er ___ barnehagen.","correct":"i"},
+    {"q":"Han sitter ___ bilen.","correct":"i"},
+    {"q":"Vi er ___ taket.","correct":"på"},
+    {"q":"Hun jobber ___ kontoret.","correct":"på"},
+    {"q":"De er ___ huset.","correct":"i"},
+    {"q":"Katten er ___ stolen.","correct":"på"},
+    {"q":"Maten er ___ bordet.","correct":"på"},
+    {"q":"Vi bor ___ Norge.","correct":"i"},
+    {"q":"Han er ___ rommet.","correct":"i"},
+    {"q":"Boken ligger ___ bordet.","correct":"på"},
+    {"q":"Hun er ___ skolen.","correct":"på"},
+    {"q":"De sitter ___ sofaen.","correct":"i"},
+    {"q":"Barna leker ___ hagen.","correct":"i"},
+    {"q":"Koppen står ___ bordet.","correct":"på"}
+  ]
+}

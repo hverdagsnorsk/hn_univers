@@ -1,0 +1,97 @@
+/* ==========================================================
+   HN LEX – Edit (2026 layout)
+   Scope: .lex-edit
+========================================================== */
+
+.lex-edit .hn-label,
+.lex-edit label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: .35rem;
+}
+
+/* Inputs */
+
+.lex-edit input,
+.lex-edit select,
+.lex-edit textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lex-edit textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.lex-edit .lex-textarea--example {
+  min-height: 100px;
+}
+
+/* Layout grids */
+
+.lex-edit .lex-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .lex-edit .lex-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+
+.lex-edit .lex-card {
+  padding: 1.4rem;
+}
+
+.lex-edit .lex-subcard {
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  padding: 1.3rem;
+  background: rgba(0,0,0,.02);
+}
+
+.lex-edit .lex-subcard + .lex-subcard {
+  margin-top: 1.2rem;
+}
+
+/* Row layout */
+
+.lex-edit .lex-row {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.lex-edit .lex-row .lex-grow {
+  flex: 1 1 340px;
+  min-width: 280px;
+}
+
+.lex-edit .lex-row .lex-narrow {
+  flex: 0 0 220px;
+}
+
+/* Vertical stack spacing */
+
+.lex-edit .lex-stack > * + * {
+  margin-top: 1rem;
+}
+
+/* Cleaner spacing inside cards */
+
+.lex-edit .hn-card {
+  border-radius: 22px;
+}
+
+/* Slightly larger form rhythm */
+
+.lex-edit .hn-card__title {
+  margin-bottom: 1rem;
+}

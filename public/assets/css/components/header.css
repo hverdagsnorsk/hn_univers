@@ -1,0 +1,19 @@
+.hn-header {
+  background: linear-gradient(135deg,var(--hn-primary),var(--hn-primary-dark));
+  color: #fff;
+  text-align: center;
+}
+
+.hn-header h1 {
+  margin: 0;
+}
+
+.hn-header p {
+  margin-top: 8px;
+  opacity: .9;
+}
+
+/* MODUSER */
+.hn-header--portal { padding: 60px 20px; }
+.hn-header--learning { padding: 48px 20px; }
+.hn-header--focus { padding: 32px 20px; }

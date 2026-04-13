@@ -1,0 +1,285 @@
+<?php
+declare(strict_types=1);
+
+/* ======================================================
+   BOOTSTRAP
+====================================================== */
+
+require_once __DIR__ . '/../hn_core/inc/bootstrap.php';
+
+use HnCore\Database\DatabaseManager;
+
+/* ======================================================
+   DATABASE (robust)
+====================================================== */
+
+try {
+    if (method_exists(DatabaseManager::class, 'get')) {
+        $pdo = db();
+    } elseif (method_exists(DatabaseManager::class, 'getConnection')) {
+        $pdo = db();
+    } else {
+        throw new RuntimeException('DatabaseManager mangler metode');
+    }
+} catch (Throwable $e) {
+    die("DB FEIL: " . $e->getMessage());
+}
+
+/* ======================================================
+   FALLBACK: get_books()
+====================================================== */
+
+function get_books(): array
+{
+    $base = __DIR__ . '/../hn_books/books';
+
+    if (!is_dir($base)) return [];
+
+    $dirs = array_filter(scandir($base), fn($d) =>
+        $d !== '.' && $d !== '..' && is_dir($base . '/' . $d)
+    );
+
+    return array_values($dirs);
+}
+
+/* ======================================================
+   GENERATOR
+====================================================== */
+
+require_once __DIR__ . '/text_generate.php';
+
+/* ======================================================
+   INIT
+====================================================== */
+
+$error   = '';
+$success = '';
+$books   = get_books();
+
+/* ======================================================
+   HELPERS
+====================================================== */
+
+function h($s) {
+    return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
+}
+
+/* 🔧 NY: Normalisering av norsk tegnsetting */
+function normalize_norwegian_spacing(string $html): string
+{
+    // Fjern mellomrom (inkl NBSP) før tegnsetting
+    $html = preg_replace('/(?:\x{00A0}|\s)+([.,;:!?])/u', '$1', $html);
+
+    // Fjern mellomrom før avsluttende tegn
+    $html = preg_replace('/(?:\x{00A0}|\s)+([)\]\}»”])/u', '$1', $html);
+
+    // Fjern mellomrom etter åpningstegn
+    $html = preg_replace('/([(\[\{«“])(?:\x{00A0}|\s)+/u', '$1', $html);
+
+    // Rydd doble mellomrom
+    $html = preg_replace('/[ \t]{2,}/u', ' ', $html);
+
+    return $html ?? '';
+}
+
+function normalize_key(string $s): string
+{
+    $s = trim($s);
+    $s = preg_replace('/\s+/', '-', $s);
+    $s = preg_replace('/[^A-Za-z0-9\-]/', '', $s);
+    $s = preg_replace('/\-+/', '-', $s);
+    return strtolower(trim($s, '-'));
+}
+
+function next_text_key( string $bookKey): string
+{
+    $stmt = db()->prepare("
+        SELECT text_key
+        FROM texts
+        WHERE book_key = :bk
+        ORDER BY id DESC
+        LIMIT 200
+    ");
+    $stmt->execute(['bk' => $bookKey]);
+
+    $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $max = 0;
+    foreach ($rows as $tk) {
+        if (preg_match('/-(\d{3})$/', (string)$tk, $m)) {
+            $n = (int)$m[1];
+            if ($n > $max) $max = $n;
+        }
+    }
+
+    return ucfirst($bookKey) . '-' . str_pad((string)($max + 1), 3, '0', STR_PAD_LEFT);
+}
+
+/* ======================================================
+   POST
+====================================================== */
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $bookKeySelected = $_POST['book_key_select'] ?? '';
+    $bookKeyNew      = $_POST['book_key_new'] ?? '';
+
+    if ($bookKeySelected !== '') {
+        $bookKey = normalize_key($bookKeySelected);
+    } elseif ($bookKeyNew !== '') {
+        $bookKey = normalize_key($bookKeyNew);
+    } else {
+        $error = 'Velg bok eller skriv ny.';
+    }
+
+    $title   = trim($_POST['title'] ?? '');
+    $level   = trim($_POST['level'] ?? '');
+    $rawHtml = $_POST['raw_html'] ?? '';
+
+    if (!$error && ($title === '' || $rawHtml === '')) {
+        $error = 'Tittel og tekst må fylles ut.';
+    }
+
+    if (!$error) {
+        try {
+
+            /* 🔧 KRITISK: normaliser før lagring */
+            $rawHtml = normalize_norwegian_spacing($rawHtml);
+
+            $textKey = next_text_key($pdo, $bookKey);
+
+            $sourcePath = generate_text_html_v2(
+                bookKey: $bookKey,
+                textKey: $textKey,
+                title:   $title,
+                rawHtml: $rawHtml,
+                level:   ($level !== '' ? $level : null)
+            );
+
+            $stmt = db()->prepare("
+                INSERT INTO texts (
+                    book_key,
+                    text_key,
+                    title,
+                    level,
+                    source_path,
+                    active,
+                    created_at
+                ) VALUES (
+                    :book_key,
+                    :text_key,
+                    :title,
+                    :level,
+                    :source_path,
+                    1,
+                    NOW()
+                )
+            ");
+
+            $stmt->execute([
+                'book_key'    => $bookKey,
+                'text_key'    => $textKey,
+                'title'       => $title,
+                'level'       => ($level !== '' ? $level : null),
+                'source_path' => $sourcePath
+            ]);
+
+            $success = "Lagret: {$sourcePath}";
+
+        } catch (Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
+}
+
+/* ======================================================
+   VIEW
+====================================================== */
+
+require_once __DIR__ . '/../hn_core/layout/header.php';
+?>
+
+<style>
+.hn-card { display:block !important; width:100% !important; }
+</style>
+
+<main class="hn-container hn-admin">
+
+<h1>Opprett ny tekst</h1>
+
+<?php if ($error): ?>
+<div style="color:red"><?= h($error) ?></div>
+<?php endif; ?>
+
+<?php if ($success): ?>
+<div style="color:green"><?= h($success) ?></div>
+<?php endif; ?>
+
+<form method="post" id="genForm">
+
+<h3>Bok</h3>
+
+<select name="book_key_select">
+<option value="">Velg bok</option>
+<?php foreach ($books as $bk): ?>
+<option value="<?= h($bk) ?>"><?= h($bk) ?></option>
+<?php endforeach; ?>
+</select>
+
+<p>eller</p>
+<input name="book_key_new" placeholder="ny bok">
+
+<h3>Metadata</h3>
+
+<input name="level" placeholder="A2 / B1 / B2">
+<input name="title" placeholder="Tittel">
+
+<h3>Tekst</h3>
+
+<textarea id="wysiwyg"></textarea>
+<input type="hidden" name="raw_html" id="raw_html">
+
+<br><br>
+<button type="submit">Lagre</button>
+
+</form>
+
+</main>
+
+<script src="/hn_core/vendor/tinymce/tinymce.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+if (typeof tinymce === "undefined") {
+    alert("TinyMCE ikke lastet!");
+    return;
+}
+
+tinymce.init({
+    selector:'#wysiwyg',
+    license_key: 'gpl',
+    height:500,
+    menubar:false,
+    plugins:'lists link',
+    toolbar:'undo redo | bold italic | bullist numlist | link',
+    setup:(editor)=>{
+        const form=document.getElementById('genForm');
+
+        form.addEventListener('submit',function(e){
+            tinymce.triggerSave();
+            const content=editor.getContent();
+            document.getElementById('raw_html').value=content;
+
+            if(!content || content.replace(/<[^>]*>/g,'').trim()===''){
+                e.preventDefault();
+                alert('Tekst mangler');
+            }
+        });
+    }
+});
+
+});
+</script>
+
+<?php require_once __DIR__ . '/../hn_core/layout/footer.php'; ?>

@@ -1,0 +1,185 @@
+let TASKS = window.TASKS || [];
+let ATTEMPT_ID = window.ATTEMPT_ID || null;
+
+let currentTask = null;
+let answered = false;
+
+let difficulty = 1;
+let correctStreak = 0;
+let wrongStreak = 0;
+
+const usedTasks = new Set();
+
+/* ------------------------------------------------ */
+
+function pickTask() {
+
+    let candidates = TASKS.filter(t =>
+        t.difficulty === difficulty &&
+        !usedTasks.has(t.id)
+    );
+
+    if (!candidates.length) {
+
+        candidates = TASKS.filter(t => !usedTasks.has(t.id));
+
+    }
+
+    if (!candidates.length) {
+
+        document.getElementById("question").innerHTML =
+            "Alle oppgaver er gjennomført.";
+
+        return null;
+    }
+
+    return candidates[Math.floor(Math.random()*candidates.length)];
+}
+
+/* ------------------------------------------------ */
+
+function renderTask(task) {
+
+    currentTask = task;
+    answered = false;
+
+    usedTasks.add(task.id);
+
+    const q = document.getElementById("question");
+    const opt = document.getElementById("options");
+
+    q.innerHTML = task.question || task.sentence || "";
+
+    opt.innerHTML = "";
+
+    if(task.options){
+
+        task.options.forEach(o => {
+
+            const btn = document.createElement("button");
+
+            btn.innerText = o;
+
+            btn.onclick = () => answer(o);
+
+            opt.appendChild(btn);
+
+        });
+
+    } else {
+
+        const input = document.createElement("input");
+
+        input.type = "text";
+
+        const btn = document.createElement("button");
+
+        btn.innerText = "Svar";
+
+        btn.onclick = () => answer(input.value);
+
+        opt.appendChild(input);
+        opt.appendChild(btn);
+
+    }
+
+}
+
+/* ------------------------------------------------ */
+
+function answer(value){
+
+    if(answered) return;
+
+    answered = true;
+
+    let correct = false;
+
+    if(currentTask.answer){
+
+        correct =
+            value.toString().toLowerCase().trim()
+            === currentTask.answer.toString().toLowerCase().trim();
+
+    }
+
+    if(correct){
+
+        correctStreak++;
+        wrongStreak = 0;
+
+        if(correctStreak >= 3){
+            difficulty++;
+            correctStreak = 0;
+        }
+
+    } else {
+
+        wrongStreak++;
+        correctStreak = 0;
+
+        if(wrongStreak >= 2 && difficulty > 1){
+            difficulty--;
+            wrongStreak = 0;
+        }
+
+    }
+
+    saveAttempt(correct,value);
+
+    document.getElementById("nextBtn").style.display="block";
+
+}
+
+/* ------------------------------------------------ */
+
+function saveAttempt(correct,value){
+
+    fetch("/hn_books/task_system/api/save_attempt.php",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            attempt_id:ATTEMPT_ID,
+            task_id:currentTask.id,
+            correct:correct ? 1 : 0,
+            response:value
+
+        })
+
+    });
+
+}
+
+/* ------------------------------------------------ */
+
+document.getElementById("nextBtn").onclick = () => {
+
+    const task = pickTask();
+
+    if(task){
+
+        renderTask(task);
+
+        document.getElementById("nextBtn").style.display="none";
+
+    }
+
+};
+
+/* ------------------------------------------------ */
+
+window.onload = () => {
+
+    const first = pickTask();
+
+    if(first){
+        renderTask(first);
+    }
+
+};

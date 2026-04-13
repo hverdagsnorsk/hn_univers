@@ -1,0 +1,46 @@
+  "rapportere": {
+    "A1": {
+      "definition": "Å si ifra når noe skjer.",
+      "examples": [
+        "Du må rapportere hvis noe går galt.",
+        "Han rapporterer til lederen."
+      ]
+    },
+    "A2": {
+      "definition": "Å gi beskjed om en hendelse, ofte skriftlig.",
+      "examples": [
+        "Alle ansatte skal rapportere uønskede hendelser.",
+        "Hun rapporterte avviket i systemet."
+      ]
+    },
+    "B1": {
+      "definition": "Å melde fra om en hendelse eller et avvik, ofte etter faste rutiner.",
+      "examples": [
+        "Ansatte rapporterer hendelser for å hindre nye ulykker.",
+        "Avvik skal rapporteres i henhold til prosedyren."
+      ]
+    }
+  },
+
+  "ulykke": {
+    "A1": {
+      "definition": "Noe vondt som skjer og kan skade mennesker.",
+      "examples": [
+        "Det skjedde en ulykke på jobben."
+      ]
+    },
+    "A2": {
+      "definition": "En hendelse der noen blir skadet.",
+      "examples": [
+        "En ulykke kan føre til personskade."
+      ]
+    },
+    "B1": {
+      "definition": "En plutselig hendelse som fører til skade på personer eller ting.",
+      "examples": [
+        "Ulykker skal undersøkes grundig."
+      ]
+    }
+  }
+}
+

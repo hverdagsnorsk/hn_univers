@@ -1,0 +1,115 @@
+// /hn_books/engine/reader/index.js
+
+import { initNavigation } from "./dom/navigation.js";
+import { initFontScale } from "./ui/fontScale.js";
+import { initAudioMarkers } from "./dom/audioMarkers.js";
+import { attachInteractions } from "./interaction/interactionEngine.js";
+import { createLexService } from "./services/lexService.js";
+import { showPopover } from "./ui/popover.js";
+
+const lex = createLexService();
+
+/* ==========================================================
+   INIT
+========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("INIT OK");
+
+    initNavigation();
+    initFontScale();
+    initAudioMarkers();
+
+    attachInteractions(onWordClick);
+});
+/* ==========================================================
+   CLICK HANDLER
+========================================================== */
+
+async function onWordClick(word, node) {
+
+    const context = buildContext(node, word);
+
+    try {
+        const result = await lex.lookupWord(word, context);
+        showPopover(node, result);
+    } catch (e) {
+        console.error("Lookup failed", e);
+    }
+}
+
+/* ==========================================================
+   CONTEXT BUILDER
+========================================================== */
+
+function buildContext(node, word) {
+
+    const paragraphEl = node.closest("p");
+
+    const paragraph = paragraphEl
+        ? paragraphEl.innerText.trim()
+        : "";
+
+    const sentence = extractSentence(paragraph, word);
+
+    const tokens = tokenize(sentence);
+
+    const normalizedWord = word.toLowerCase();
+
+    const indices = [];
+
+    tokens.forEach((t, i) => {
+        if (t === normalizedWord) {
+            indices.push(i);
+        }
+    });
+
+    const index = indices.length ? indices[0] : -1;
+
+    const prev = index > 0 ? tokens[index - 1] : "";
+    const next = index >= 0 && index < tokens.length - 1
+        ? tokens[index + 1]
+        : "";
+
+    return {
+        word,
+        prev,
+        next,
+        sentence,
+        paragraph,
+        word_index: index,
+        tokens
+    };
+}
+
+/* ==========================================================
+   SENTENCE EXTRACTION
+========================================================== */
+
+function extractSentence(paragraph, word) {
+
+    if (!paragraph) return "";
+
+    const sentences = paragraph.split(/(?<=[.!?])\s+/);
+
+    for (const s of sentences) {
+        if (s.toLowerCase().includes(word.toLowerCase())) {
+            return s.trim();
+        }
+    }
+
+    return sentences[0] || "";
+}
+
+/* ==========================================================
+   TOKENIZER
+========================================================== */
+
+function tokenize(sentence) {
+
+    return sentence
+        .toLowerCase()
+        .replace(/[^\p{L}\s\-]/gu, "")
+        .split(/\s+/)
+        .filter(Boolean);
+}

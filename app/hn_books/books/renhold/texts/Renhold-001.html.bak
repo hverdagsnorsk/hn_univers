@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>1. Tekst 1: En ny start | Hverdagsnorsk</title>
+
+  
+  <!-- Leser 2026 – ENESTE STYLING -->
+  <link rel="stylesheet" href="/hn_books/engine/reader_2026.css?v=1770067175">
+  <script src="/hn_books/engine/reader.js?v=1770067175" defer></script>
+</head>
+
+<body>
+
+<div class="reader">
+
+  <header class="header">
+<img
+  src="/hn_admin/assets/fulllogo_transparent_nobuffer.png"
+  class="logo"
+  alt="Hverdagsnorsk logo"
+>
+  </header>
+
+  <!-- Leser-navigasjon (bygges av reader.js) -->
+  <nav class="reader-nav" data-back="../index.php"></nav>
+
+  <main class="book-container">
+    <section>
+
+      <!-- STØRRELSESVERKTØY – KUN HER -->
+      <div class="reader-tools">
+        <button data-action="decrease">A−</button>
+        <button data-action="reset">A</button>
+        <button data-action="increase">A+</button>
+      </div>
+
+      <!-- TITTEL FOR TEKSTEN -->
+      <h2>1. Tekst 1: En ny start</h2>
+
+      <!-- SELVE TEKSTEN -->
+      <figure class="section-controls">
+  <audio controls preload="metadata">
+    <source src="../audio/REN-1-1.m4a" type="audio/mp4">
+  </source></audio>
+</figure>
+<p>Amina starter i ny jobb som renholder på et sykehus. Hun har erfaring med renhold fra før, blant annet fra kontorer og offentlige bygg, men dette er første gang hun jobber i helsevesenet. Allerede før hun begynner, har hun forstått at renhold på et sykehus stiller andre krav enn hun er vant til, fordi arbeidet ikke bare handler om orden og renslighet, men også om helse, trygghet og ansvar for andre mennesker.</p>
+<figure class="section-controls">
+  <audio controls preload="metadata">
+    <source src="../audio/REN-1-2.m4a" type="audio/mp4">
+  </source></audio>
+</figure>
+<p>Sykehuset er stort og består av mange bygninger og avdelinger med lange korridorer, mange rom og ulike områder som brukes til forskjellige formål. Noen steder er det pasienter som trenger ro, mens det andre steder er høy aktivitet hele døgnet, og Amina vet at hun etter hvert må lære å orientere seg trygt og effektivt i dette store og komplekse systemet.</p>
+<figure class="section-controls">
+  <audio controls preload="metadata">
+    <source src="../audio/REN-1-3.m4a" type="audio/mp4">
+  </source></audio>
+</figure>
+<p>Amina begynner arbeidsdagen klokken seks om morgenen, og det er fortsatt mørkt ute når hun går hjemmefra og drar til jobb. På vei til sykehuset tenker hun på den nye hverdagen som venter henne, og selv om hun kjenner seg litt nervøs, er hun også glad for å ha fått jobben, fordi den gir både trygg inntekt og mulighet til videre utvikling i arbeidslivet.</p>
+<figure class="section-controls">
+  <audio controls preload="metadata">
+    <source src="../audio/REN-1-4.m4a" type="audio/mp4">
+  </source></audio>
+</figure>
+<p>Når Amina kommer inn på sykehuset tidlig om morgenen, er det stille i gangene, og bare noen få ansatte er allerede på jobb. Hun vet at pasientene snart skal ha behandling, og at leger, sykepleiere og annet helsepersonell vil fylle avdelingene, og derfor må mange rom være ferdig rengjort og klare før dagen starter for alvor.</p>
+<figure class="section-controls">
+  <audio controls preload="metadata">
+    <source src="../audio/REN-1-5.m4a" type="audio/mp4">
+  </source></audio>
+</figure>
+<p>Amina er opptatt av å gjøre en god jobb og vet at renholderne spiller en viktig rolle på sykehuset, selv om arbeidet deres ofte ikke blir lagt så godt merke til. Hvis renholdet ikke blir gjort riktig, kan det få alvorlige konsekvenser, og derfor er det viktig å følge rutiner, bruke riktig utstyr, jobbe systematisk og utføre oppgavene i riktig rekkefølge i tråd med regler for hygiene og smittevern.</p>
+<figure class="section-controls">
+  <audio controls preload="metadata">
+    <source src="../audio/REN-1-6.m4a" type="audio/mp4">
+  </source></audio>
+</figure>
+<p>Når hun går gjennom hovedinngangen som ansatt for første gang, ser Amina mennesker i ulike uniformer og arbeidsklær som beveger seg raskt gjennom bygningen eller stopper for korte samtaler. Hun føler seg litt usikker, men også nysgjerrig, og hun vet at dette er starten på en ny arbeidshverdag der hun gradvis vil bli tryggere, bli kjent med kollegaene sine og lære hvordan hun best kan samarbeide med andre.</p>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Hverdagsnorsk</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

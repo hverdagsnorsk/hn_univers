@@ -1,0 +1,58 @@
+.reader {
+  --font-scale: 1;
+  --primary: #2f8485;
+  --sentence-bg: rgba(47,132,133,.14);
+  --sentence-border: rgba(47,132,133,.35);
+  --word-bg: #fde68a;
+  --word-border: #facc15;
+}
+
+.reader {
+  font-size: calc(1rem * var(--font-scale));
+  line-height: 1.65;
+}
+
+.sentence {
+  cursor: pointer;
+  padding: 2px 3px;
+  border-radius: 6px;
+}
+
+.sentence.active {
+  background: var(--sentence-bg);
+  outline: 2px solid var(--sentence-border);
+}
+
+.word {
+  cursor: pointer;
+  padding: 1px 2px;
+  border-radius: 4px;
+}
+
+.word.active {
+  background: var(--word-bg);
+  outline: 1px solid var(--word-border);
+}
+
+/* user-select KUN der det trengs */
+.sentence,
+.word {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Popover */
+.word-popover {
+  position: absolute;
+  z-index: 99999;
+  max-width: 260px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  pointer-events: none;
+}
+
+.word-popover.hidden {
+  display: none;
+}

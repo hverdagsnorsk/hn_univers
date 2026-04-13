@@ -1,0 +1,27 @@
+{
+  "name": "hverdagsnorsk/app",
+  "description": "Hverdagsnorsk platform",
+  "type": "project",
+
+  "autoload": {
+    "psr-4": {
+      "HnCore\\": "hn_core/src/",
+      "HnLex\\": "hn_lex/src/",
+      "HnBooks\\": "hn_books/src/",
+      "HnCourses\\": "hn_courses/src/",
+      "HnAdmin\\": "hn_admin/src/", 
+      "HnTasks\\": "hn_tasks/src/"
+    },
+    "files": [
+      "hn_courses/src/Support/db.php"
+    ]
+  },
+
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "erusev/parsedown": "^1.8"
+  }
+}

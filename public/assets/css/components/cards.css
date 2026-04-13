@@ -1,0 +1,73 @@
+.hn-card {
+  background: var(--hn-surface);
+  border-radius: var(--hn-radius);
+  box-shadow: var(--hn-shadow);
+  padding: 24px;
+}
+
+/* Typografi i kort */
+.hn-card {
+  line-height: 1.6;
+}
+
+.hn-card h2,
+.hn-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.6em;
+}
+
+.hn-card p,
+.hn-card ul {
+  max-width: 65ch;
+}
+
+.hn-card p {
+  margin: 0 0 0.75em;
+}
+
+.hn-card ul {
+  padding-left: 1.2em;
+}
+
+.hn-card ul li {
+  margin-bottom: 0.6em;
+  line-height: 1.5;
+}
+
+.hn-card + .hn-card {
+  margin-top: var(--hn-space-md);
+}
+
+.card-book {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-cover-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius-md);
+}
+
+.card-cover--placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-muted);
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+}
+
+.card-title {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+}

@@ -1,0 +1,23 @@
+.hn-video {
+  margin-top: var(--hn-space-sm);
+  margin-bottom: var(--hn-space-md);
+  opacity: 0.9;
+}
+
+.hn-video-title {
+  font-size: 0.95rem;
+  color: var(--hn-muted);
+  margin-bottom: 6px;
+}
+
+.hn-video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--hn-radius-sm);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* Sekundær video = mindre fokus */
+.hn-video--secondary iframe {
+  max-width: 520px;
+}

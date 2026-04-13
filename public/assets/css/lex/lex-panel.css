@@ -1,0 +1,40 @@
+.lex-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 360px;
+  height: 100%;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  padding: 1rem;
+  box-shadow: -2px 0 6px rgba(0,0,0,.1);
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.lex-panel h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.lex-panel .close {
+  float: right;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.lex-panel .label {
+  font-size: .8rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.lex-panel .inflection {
+  font-size: .9rem;
+}
+
+.lex-word {
+  cursor: pointer;
+  background: rgba(255,230,150,.4);
+}

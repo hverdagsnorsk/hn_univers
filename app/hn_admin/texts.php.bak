@@ -1,0 +1,312 @@
+<?php
+declare(strict_types=1);
+
+/* ======================================================
+   BOOTSTRAP
+====================================================== */
+
+$root = dirname(__DIR__);
+
+require_once $root . '/hn_core/inc/bootstrap.php';
+require_once $root . '/hn_core/auth/admin.php';
+
+use HnCore\Database\DatabaseManager;
+
+/* ======================================================
+   DATABASE (PSR-4)
+====================================================== */
+
+try {
+    if (method_exists(DatabaseManager::class, 'get')) {
+        $pdo = db();
+    } elseif (method_exists(DatabaseManager::class, 'getConnection')) {
+        $pdo = db();
+    } else {
+        throw new RuntimeException('DatabaseManager mangler metode');
+    }
+} catch (Throwable $e) {
+    die("DB FEIL: " . $e->getMessage());
+}
+
+/* ======================================================
+   FALLBACK HELPERS
+====================================================== */
+
+function get_books(): array
+{
+    $base = __DIR__ . '/../hn_books/books';
+
+    if (!is_dir($base)) return [];
+
+    $dirs = array_filter(scandir($base), fn($d) =>
+        $d !== '.' && $d !== '..' && is_dir($base . '/' . $d)
+    );
+
+    return array_values($dirs);
+}
+
+function get_texts_for_book(string $book): array
+{
+    $path = __DIR__ . '/../hn_books/books/' . $book . '/texts';
+
+    if (!is_dir($path)) return [];
+
+    $files = glob($path . '/*.html') ?: [];
+
+    return array_map(function ($f) {
+        return [
+            'id' => basename($f, '.html'),
+            'path' => $f
+        ];
+    }, $files);
+}
+
+function h($s) {
+    return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
+}
+
+/* ======================================================
+   INIT
+====================================================== */
+
+$page_title  = "Administrer tekster";
+$layout_mode = 'admin';
+
+require_once $root . '/hn_core/layout/header.php';
+
+/* ======================================================
+   DATA
+====================================================== */
+
+$books = get_books();
+if (!$books) {
+    exit('Ingen bøker funnet.');
+}
+
+$book = $_GET['book'] ?? $books[0];
+
+$stmt = db()->prepare("
+    SELECT
+        t.id,
+        t.text_key,
+        t.title,
+        t.source_path,
+        t.active,
+        t.created_at,
+        COUNT(k.id) AS task_count
+    FROM texts t
+    LEFT JOIN tasks k ON k.text_id = t.id
+    WHERE t.book_key = :book
+    GROUP BY t.id
+    ORDER BY t.created_at DESC
+");
+
+$stmt->execute(['book' => $book]);
+$texts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/* ======================================================
+   FILER PÅ DISK
+====================================================== */
+
+$files = get_texts_for_book($book);
+$fileNames = array_map(fn($f) => $f['id'] . '.html', $files);
+
+$registered = array_map(
+    fn($t) => basename((string)$t['source_path']),
+    $texts
+);
+
+$unregistered = array_values(array_diff($fileNames, $registered));
+?>
+
+<main class="page admin-page">
+
+<header class="page-header">
+    <h1>Administrer tekster</h1>
+    <p class="page-intro">Oversikt over registrerte tekster i valgt bok.</p>
+</header>
+
+<section class="admin-card-section">
+
+<div class="admin-toolbar-card">
+
+<form method="get" class="admin-toolbar">
+
+<div class="toolbar-group">
+<label for="bookSelect">Velg bok</label>
+<select id="bookSelect" name="book" onchange="this.form.submit()">
+<?php foreach ($books as $b): ?>
+<option value="<?= h($b) ?>" <?= $b === $book ? 'selected' : '' ?>>
+<?= h($b) ?>
+</option>
+<?php endforeach; ?>
+</select>
+</div>
+
+<div class="toolbar-group">
+<label for="textSearch">Søk</label>
+<input type="search" id="textSearch" placeholder="Søk etter tittel eller ID…">
+</div>
+
+<div class="toolbar-group">
+<label for="statusFilter">Filter</label>
+<select id="statusFilter">
+<option value="all">Alle</option>
+<option value="active">Kun aktive</option>
+<option value="noTasks">Uten oppgaver</option>
+</select>
+</div>
+
+<div class="toolbar-group toolbar-group--meta">
+<div class="toolbar-meta">
+<span class="toolbar-meta__label">Viser:</span>
+<span class="toolbar-meta__value" id="visibleCount"><?= count($texts) ?></span>
+<span class="toolbar-meta__label">av</span>
+<span class="toolbar-meta__value"><?= count($texts) ?></span>
+</div>
+</div>
+
+</form>
+
+<?php if ($unregistered): ?>
+<div class="admin-alert admin-alert--warning">
+
+<div class="admin-alert__title">
+Uregistrerte tekster (på disk)
+</div>
+
+<div class="admin-alert__body">
+
+<ul class="admin-plain-list">
+<?php foreach ($unregistered as $f): ?>
+<li><code><?= h($f) ?></code></li>
+<?php endforeach; ?>
+</ul>
+
+<div class="admin-alert__hint">
+Bruk <strong>Systemverktøy → Skann bøker</strong> for å registrere dem.
+</div>
+
+</div>
+
+</div>
+<?php endif; ?>
+
+</div>
+
+<div class="admin-table-wrap">
+
+<table class="admin-table admin-table--dense" id="textTable">
+
+<thead>
+<tr>
+<th class="col-id">ID</th>
+<th>Tittel</th>
+<th class="col-num">Oppgaver</th>
+<th class="col-status">Status</th>
+<th class="col-actions">Handling</th>
+</tr>
+</thead>
+
+<tbody>
+
+<?php foreach ($texts as $t): ?>
+
+<?php
+$id     = (int)$t['id'];
+$title  = (string)$t['title'];
+$key    = (string)$t['text_key'];
+$src    = (string)$t['source_path'];
+$count  = (int)$t['task_count'];
+$active = (int)$t['active'] === 1;
+
+$status = $active ? 'active' : 'inactive';
+
+$created = $t['created_at']
+    ? date('d.m.Y H:i', strtotime((string)$t['created_at']))
+    : '';
+?>
+
+<tr
+class="admin-row"
+data-id="<?= $id ?>"
+data-title="<?= h(mb_strtolower($title)) ?>"
+data-tasks="<?= $count ?>"
+data-status="<?= $status ?>"
+>
+
+<td class="col-id">
+<span class="mono"><?= $id ?></span>
+</td>
+
+<td class="title-col">
+
+<div class="text-title">
+<?= h($title) ?>
+</div>
+
+<div class="text-meta">
+<span class="mono"><?= h($key) ?></span>
+<span class="dot">•</span>
+<span><?= h($created) ?></span>
+</div>
+
+<div class="text-path">
+<span class="mono"><?= h($src) ?></span>
+</div>
+
+</td>
+
+<td class="tasks-col col-num">
+
+<?php if ($count === 0): ?>
+<span class="badge badge-danger">0</span>
+<?php elseif ($count < 5): ?>
+<span class="badge badge-warning"><?= $count ?></span>
+<?php else: ?>
+<span class="badge badge-success"><?= $count ?></span>
+<?php endif; ?>
+
+</td>
+
+<td class="status-col col-status">
+
+<?php if ($active): ?>
+<span class="badge badge-success">Aktiv</span>
+<?php else: ?>
+<span class="badge badge-warning">Inaktiv</span>
+<?php endif; ?>
+
+</td>
+
+<td class="actions-col col-actions">
+
+<a href="<?= h($src) ?>"
+target="_blank"
+class="hn-btn small-btn secondary">
+Vis
+</a>
+
+<a href="text_edit.php?id=<?= $id ?>"
+class="hn-btn small-btn">
+Rediger
+</a>
+
+</td>
+
+</tr>
+
+<?php endforeach; ?>
+
+</tbody>
+</table>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="../js/admin-texts.js"></script>
+
+<?php require_once $root . '/hn_core/layout/footer.php'; ?>

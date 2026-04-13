@@ -1,0 +1,66 @@
+/* ==========================================================
+   TASKS – BASE STYLES
+========================================================== */
+
+.task {
+    margin-bottom: 32px;
+}
+
+.task-prompt {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.task-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+/* ==========================================================
+   DRAG & DROP
+========================================================== */
+
+.drag-sort {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.drag-bank,
+.drag-column {
+    flex: 1 1 220px;
+    min-height: 120px;
+    border-radius: 12px;
+    padding: 10px;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+}
+
+.drag-column h4 {
+    margin-top: 0;
+    font-size: .9rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #475569;
+}
+
+.drag-word {
+    display: inline-block;
+    padding: 6px 10px;
+    margin: 4px;
+    background: #ffffff;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    cursor: grab;
+    font-size: .9rem;
+    user-select: none;
+}
+
+.drag-column.drag-over {
+    background: #e6f3f3;
+    border-color: #2f8485;
+}

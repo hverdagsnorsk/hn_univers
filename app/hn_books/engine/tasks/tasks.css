@@ -1,0 +1,456 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+}
+
+.hdr h1::before {
+    content: "📝 ";
+  display: inline-block;
+  width: 8px;
+  height: 28px;
+  background: #2f8485;
+  margin-right: 12px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+:root {
+  --maxw: 900px;
+  --border: #ddd;
+  --bg: #ffffff;
+  --muted: #666;
+  --ok: #0a7a2f;
+  --bad: #b00020;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f4f4f4;
+  color: #111;
+}
+
+.wrapper {
+  max-width: var(--maxw);
+  margin: 24px auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.hdr {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.hdr h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.hdr .meta {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.hdr-sub {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.card h2 {
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+}
+
+.prompt {
+  margin: 0 0 10px 0;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+button {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button.primary {
+  border-color: #222;
+}
+
+.feedback {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.feedback.ok { color: var(--ok); }
+.feedback.bad { color: var(--bad); }
+
+.notice {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fafafa;
+  color: var(--muted);
+}
+
+
+/* === Oppgavekort (forståelig gruppering) === */
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  background: #fff;
+}
+
+.prompt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* === Flervalg (MCQ) === */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.option:hover {
+  background: #f0f8f8;
+}
+
+.option input[type="radio"] {
+  margin-top: 3px;
+  transform: scale(1.1);
+}
+
+.option span {
+  line-height: 1.35;
+}
+
+/* === Skriveoppgaver === */
+
+textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  line-height: 1.4;
+  resize: vertical;
+  background: #fff;
+}
+
+/* === Deltakerregistrering === */
+
+.card .prompt {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-top: 12px;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+/* === Knapper === */
+
+.actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+button.primary {
+  background: #2f8485;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  background: #226c6d;
+}
+
+.card + .card {
+  margin-top: 22px;
+}
+
+
+/* === Knapper === */
+
+.actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+button.primary {
+  background: #2f8485;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  background: #226c6d;
+}
+
+/* === Deltakerregistrering === */
+
+.card .prompt {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-top: 12px;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}
+/* === Skriveoppgaver === */
+
+textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  line-height: 1.4;
+  resize: vertical;
+  background: #fff;
+}
+/* === Flervalg (MCQ) === */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.option:hover {
+  background: #f0f8f8;
+}
+
+.option input[type="radio"] {
+  margin-top: 3px;
+  transform: scale(1.1);
+}
+
+.option span {
+  line-height: 1.35;
+}
+
+/* === Oppgavekort (forståelig gruppering) === */
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  background: #fff;
+}
+
+.prompt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* ======================================================
+   MCQ – tydelig struktur og valg
+   Gjelder alle flervalg globalt
+====================================================== */
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+/* Spørsmål */
+.card .prompt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* Alternativer */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Ett alternativ = én klikkbar blokk */
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+/* Gjør hele raden klikkbar */
+.option input {
+  margin: 0;
+  transform: scale(1.1);
+}
+
+/* Hover */
+.option:hover {
+  background: #f5fafa;
+  border-color: #2f8485;
+}
+
+/* Valgt alternativ */
+.option input:checked + span {
+  font-weight: 600;
+}
+
+.option:has(input:checked) {
+  background: #ecfeff;
+  border-color: #2f8485;
+}
+
+/* Tekst i alternativ */
+.option span {
+  line-height: 1.4;
+}
+
+/* Overgang mellom oppgavetyper */
+.task-transition {
+  margin: 32px 0 16px;
+  padding-top: 18px;
+  border-top: 2px dashed #cbd5e1;
+  font-weight: 700;
+  color: #2f8485;
+}
+
+/* Skriveoppgaver skiller seg subtilt ut */
+.task-short,
+.task-writing {
+  background: #f8fafc;
+  border-left: 6px solid #2f8485;
+}
+
+/* Mer plass til skriving */
+.task-short textarea,
+.task-writing textarea {
+  min-height: 160px;
+}
+

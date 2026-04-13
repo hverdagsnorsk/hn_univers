@@ -1,0 +1,118 @@
+/* ==========================================================
+   HN CORE V2 – PLATFORM ENGINE
+   Version 2.0
+========================================================== */
+
+:root {
+    --hn-radius-xl: 24px;
+    --hn-radius-lg: 18px;
+    --hn-radius-md: 14px;
+    --hn-radius-sm: 10px;
+
+    --hn-shadow-soft: 0 12px 32px rgba(0,0,0,.05);
+    --hn-shadow-hover: 0 18px 42px rgba(0,0,0,.08);
+
+    --hn-text-muted: #64748b;
+}
+
+/* ==========================================================
+   GLOBAL NAV 2.0
+========================================================== */
+
+.hn-global-nav {
+    background: #0f172a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.hn-global-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hn-brand {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: .6px;
+    color: #fff;
+}
+
+.hn-menu a {
+    margin-left: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    transition: .15s ease;
+}
+
+.hn-menu a:hover {
+    color: #ffffff;
+}
+
+/* ==========================================================
+   PAGE STRUCTURE
+========================================================== */
+
+.hn-page {
+    max-width: 1240px;
+    margin: 70px auto 120px;
+    padding: 0 36px;
+}
+
+.hn-page-header {
+    margin-bottom: 50px;
+}
+
+.hn-page-header h1 {
+    font-size: 2.7rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+}
+
+.hn-page-header p {
+    font-size: 1.05rem;
+    color: var(--hn-text-muted);
+}
+
+/* ==========================================================
+   SECTION SYSTEM
+========================================================== */
+
+.hn-section {
+    margin-bottom: 70px;
+}
+
+.hn-card {
+    background: #ffffff;
+    border-radius: var(--hn-radius-xl);
+    padding: 40px;
+    box-shadow: var(--hn-shadow-soft);
+    transition: .18s ease;
+}
+
+.hn-card:hover {
+    box-shadow: var(--hn-shadow-hover);
+}
+
+/* ==========================================================
+   GRID SYSTEM
+========================================================== */
+
+.hn-grid {
+    display: grid;
+    gap: 32px;
+}
+
+.hn-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+}
+
+.hn-grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+}

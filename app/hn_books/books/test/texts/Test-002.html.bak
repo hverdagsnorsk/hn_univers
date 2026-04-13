@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tekst 2: Vi tester igjen! | Hverdagsnorsk</title>
+
+  
+  <!-- Leser 2026 – ENESTE STYLING -->
+  <link rel="stylesheet" href="/hn_books/engine/reader_2026.css?v=2026-locked">
+  <script src="/hn_books/engine/reader.js?v=2026-locked" defer></script>
+</head>
+
+<body>
+
+<div class="reader">
+
+  <header class="header">
+    <img
+      src="/hn_books/books/test/images/fulllogo_transparent_nobuffer.png"
+      class="logo"
+      alt="Hverdagsnorsk logo"
+    >
+  </header>
+
+  <!-- Leser-navigasjon (bygges av reader.js) -->
+  <nav class="reader-nav" data-back="../index.php"></nav>
+
+  <main class="book-container">
+    <section>
+
+      <!-- STØRRELSESVERKTØY – KUN HER -->
+      <div class="reader-tools">
+        <button data-action="decrease">A−</button>
+        <button data-action="reset">A</button>
+        <button data-action="increase">A+</button>
+      </div>
+
+      <!-- TITTEL FOR TEKSTEN -->
+      <h2>Tekst 2: Vi tester igjen!</h2>
+
+      <!-- SELVE TEKSTEN -->
+              <figure class="section-controls">
+          <audio controls preload="metadata">
+            <source src="../audio/TES-2-1.m4a" type="audio/mp4">
+          </audio>
+        </figure>
+
+                  <p>I denne delen av teksten får leseren litt mer kontekst. Avsnittet er ment å leses sammenhengende, uten at noe spesielt fremheves, men med god flyt og naturlige pauser.</p>
+        
+            <figure class="section-controls">
+          <audio controls preload="metadata">
+            <source src="../audio/TES-2-2.m4a" type="audio/mp4">
+          </audio>
+        </figure>
+
+                  <p>Her bygger teksten videre på det som allerede er sagt. Språket er enkelt og klart, og innholdet er ment å være representativt for hvordan faktiske tekster vil se ut i systemet.</p>
+                  <p>Denne delen markerer starten på en ny seksjon i teksten. Overgangen er myk, men tydelig nok til at leseren forstår at innholdet beveger seg videre.</p>
+        
+            <figure class="section-controls">
+          <audio controls preload="metadata">
+            <source src="../audio/TES-2-3.m4a" type="audio/mp4">
+          </audio>
+        </figure>
+
+                  <p>Avsnittet utdyper temaet ytterligere og gir rom for refleksjon. Det er lagt opp til at leseren kan ta seg tid, og eventuelt justere tekststørrelsen for bedre lesbarhet.</p>
+        
+            <figure class="section-controls">
+          <audio controls preload="metadata">
+            <source src="../audio/TES-2-4.m4a" type="audio/mp4">
+          </audio>
+        </figure>
+
+                  <p>Her fortsetter teksten med flere detaljer. Dette avsnittet er ment å fungere godt både med og uten lyd, og teste samspillet mellom tekst og avspilling.</p>
+                  <p>Nå nærmer teksten seg slutten. Dette avsnittet binder sammen de tidligere delene og gir en følelse av helhet og sammenheng.</p>
+        
+            <figure class="section-controls">
+          <audio controls preload="metadata">
+            <source src="../audio/TES-2-5.m4a" type="audio/mp4">
+          </audio>
+        </figure>
+
+                  <p>Dette avsnittet brukes for å teste hvordan den siste delen av teksten oppfører seg visuelt og strukturelt når den rendres i malen.</p>
+        
+            <figure class="section-controls">
+          <audio controls preload="metadata">
+            <source src="../audio/TES-2-6.m4a" type="audio/mp4">
+          </audio>
+        </figure>
+
+                  <p>Til slutt avsluttes teksten på en rolig og naturlig måte. Hvis denne teksten ser riktig ut i testboka, kan løsningen trygt brukes som standard for alle nye tekster fremover.</p>
+        
+    
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Hverdagsnorsk</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

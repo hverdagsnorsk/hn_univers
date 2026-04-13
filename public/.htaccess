@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# ✅ Riktig MIME (kritisk)
+AddType application/javascript .js
+AddType text/css .css
+
+# 🔥 IKKE rør assets
+RewriteCond %{REQUEST_URI} ^/assets/ [NC]
+RewriteRule ^ - [L]
+
+# 🔥 IKKE rør ekte filer
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# hn_books router
+RewriteRule ^hn_books/?(.*)$ /hn_books/router.php [L,QSA]

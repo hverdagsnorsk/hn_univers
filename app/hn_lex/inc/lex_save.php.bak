@@ -1,0 +1,131 @@
+<?php
+declare(strict_types=1);
+
+/*
+|--------------------------------------------------------------------------
+| lex_save.php – ENESTE AUTORITATIVE LAGRING
+|--------------------------------------------------------------------------
+| - Tar imot INTERN LexContract-struktur
+| - Slår opp word_class_id via DB (lex_word_classes)
+| - Skriver KUN til:
+|     lex_entries
+|     lex_explanations
+|     lex_examples
+| - Stol på DB-trigger for ordklassespesifikke tabeller
+|--------------------------------------------------------------------------
+*/
+
+function saveLexEntry(PDO $pdo, array $entry): int
+{
+    /* --------------------------------------------------
+       Valider minimum
+    -------------------------------------------------- */
+    foreach (['lemma', 'language', 'ordklasse', 'explanations'] as $key) {
+        if (empty($entry[$key])) {
+            throw new RuntimeException("Mangler felt: {$key}");
+        }
+    }
+
+    /* --------------------------------------------------
+       Finn word_class_id (DB er autoritet)
+    -------------------------------------------------- */
+    $stmt = $pdo->prepare("
+        SELECT id
+        FROM lex_word_classes
+        WHERE code = :code
+        LIMIT 1
+    ");
+    $stmt->execute([':code' => $entry['ordklasse']]);
+    $wordClassId = $stmt->fetchColumn();
+
+    if (!$wordClassId) {
+        throw new RuntimeException(
+            "Fant ikke word_class_id for ordklasse: {$entry['ordklasse']}"
+        );
+    }
+
+    $pdo->beginTransaction();
+
+    try {
+        /* ----------------------------------------------
+           1. lex_entries
+        ---------------------------------------------- */
+        $stmt = $pdo->prepare("
+            INSERT INTO lex_entries
+              (lemma, language, word_class_id, source)
+            VALUES
+              (:lemma, :language, :wc, :source)
+            ON DUPLICATE KEY UPDATE
+              id = LAST_INSERT_ID(id)
+        ");
+
+        $stmt->execute([
+            ':lemma'    => $entry['lemma'],
+            ':language' => $entry['language'],
+            ':wc'       => $wordClassId,
+            ':source'   => $entry['source'] ?? 'ai',
+        ]);
+
+        $entryId = (int)$pdo->lastInsertId();
+
+        if ($entryId <= 0) {
+            throw new RuntimeException('Kunne ikke hente entry_id');
+        }
+
+        /* ----------------------------------------------
+           2. Forklaringer (lex_explanations)
+        ---------------------------------------------- */
+        $stmt = $pdo->prepare("
+            INSERT INTO lex_explanations
+              (entry_id, level, language, explanation, example, source)
+            VALUES
+              (:entry_id, :level, :language, :explanation, :example, :source)
+            ON DUPLICATE KEY UPDATE
+              explanation = VALUES(explanation),
+              example     = VALUES(example)
+        ");
+
+        foreach ($entry['explanations'] as $level => $row) {
+            $stmt->execute([
+                ':entry_id'    => $entryId,
+                ':level'       => $level,
+                ':language'    => $entry['language'],
+                ':explanation' => $row['forklaring'],
+                ':example'     => $row['example'] ?? null,
+                ':source'      => $row['source'] ?? 'ai',
+            ]);
+        }
+
+        /* ----------------------------------------------
+           3. Eksempelsetninger (valgfritt, separat)
+        ---------------------------------------------- */
+        if (!empty($entry['examples'])) {
+            $stmt = $pdo->prepare("
+                INSERT INTO lex_examples
+                  (entry_id, sentence, level, language, source)
+                VALUES
+                  (:entry_id, :sentence, :level, :language, :source)
+            ");
+
+            foreach ($entry['examples'] as $row) {
+                $stmt->execute([
+                    ':entry_id' => $entryId,
+                    ':sentence' => $row['sentence'],
+                    ':level'    => $row['level'] ?? null,
+                    ':language' => $entry['language'],
+                    ':source'   => $row['source'] ?? 'ai',
+                ]);
+            }
+        }
+
+        /* ----------------------------------------------
+           Ferdig
+        ---------------------------------------------- */
+        $pdo->commit();
+        return $entryId;
+
+    } catch (Throwable $e) {
+        $pdo->rollBack();
+        throw $e;
+    }
+}

@@ -1,0 +1,80 @@
+<?php
+declare(strict_types=1);
+
+require_once __DIR__.'/../engine/TaskStorage.php';
+
+$book = $_GET['book'] ?? '';
+$text = $_GET['text'] ?? '';
+
+$tasks = TaskStorage::load($book,$text);
+
+?>
+<!DOCTYPE html>
+<html lang="no">
+<head>
+
+<meta charset="UTF-8">
+<title>Oppgaver</title>
+
+<link rel="stylesheet" href="../assets/task.css">
+
+</head>
+
+<body>
+
+<div class="task-container">
+
+<h1>Oppgaver</h1>
+
+<form id="taskForm">
+
+<?php foreach($tasks['tasks'] as $i=>$task): ?>
+
+<div class="task">
+
+<?php if($task['type']=="fill"): ?>
+
+<p><?=htmlspecialchars($task['sentence'])?></p>
+
+<input name="q<?=$i?>" data-answer="<?=$task['answer']?>">
+
+<?php endif; ?>
+
+<?php if($task['type']=="verb"): ?>
+
+<p>Bøy verbet: <?=$task['verb']?></p>
+
+<input name="q<?=$i?>" data-answer="">
+
+<?php endif; ?>
+
+<?php if($task['type']=="article"): ?>
+
+<p>Velg riktig artikkel: <?=$task['word']?></p>
+
+<select name="q<?=$i?>" data-answer="">
+
+<option>en</option>
+<option>ei</option>
+<option>et</option>
+
+</select>
+
+<?php endif; ?>
+
+</div>
+
+<?php endforeach; ?>
+
+<button type="button" onclick="checkAnswers()">Sjekk svar</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script src="../assets/task.js"></script>
+
+</body>
+</html>

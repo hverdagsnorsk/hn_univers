@@ -1,0 +1,32 @@
+html {
+  background: var(--hn-bg);
+}
+
+body {
+  margin: 0;
+  font-family: var(--hn-font);
+  font-size: var(--hn-font-size-base);
+  line-height: var(--hn-line-height);
+  color: var(--hn-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lenker */
+a {
+  color: var(--hn-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--hn-primary);
+}
+
+/* Hjelpeklasser */
+.hn-muted {
+  color: var(--hn-muted);
+}

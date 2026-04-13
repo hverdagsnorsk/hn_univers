@@ -1,0 +1,27 @@
+<h1><b>Lær norsk – effektivt og tilpasset dine behov!</b></h1>
+
+<div class="hjem-forside-bilde">
+  <img src="bilder/snakkna.png" alt="Snakk nå!">
+</div>
+
+<div class="hjem-fritext">
+  Jeg tilbyr <b>skreddersydde norskkurs</b> for <b>privatpersoner og bedrifter</b>, enten digitalt via <b>Zoom</b> eller på arbeidsplassen.<br>
+  Enten du er ny i Norge, vil forbedre dine språkkunnskaper eller trenger norsk i jobben – jeg tilpasser undervisningen til ditt nivå og dine mål.
+</div>
+
+<div class="hjem-two-col">
+  <div class="hjem-col hjem-col-left">
+    <img src="bilder/zoom.png" alt="Zoom-logo">
+  </div>
+  <div class="hjem-col hjem-col-right">
+    <ul>
+      <li>✅ Fleksibel undervisning – én-til-én eller i små grupper</li>
+      <li>✅ Praktisk og effektiv læring – rettet mot hverdagsliv og arbeidsliv</li>
+      <li>✅ For bedrifter – styrk kommunikasjonen på arbeidsplassen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="hjem-call-to-action">
+  🚀 Ta kontakt i dag og start din reise mot flytende norsk!
+</div>

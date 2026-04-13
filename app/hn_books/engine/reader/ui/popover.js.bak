@@ -1,0 +1,193 @@
+function normalizeWord(raw) {
+  if (!raw) return "";
+  return raw
+    .replace(/[.,!?;:()«»"'–—]/g, "")
+    .trim()
+    .toLowerCase();
+}
+
+/* ====================================================== */
+
+function createMarkup() {
+  return `
+    <div class="lex-popup">
+
+      <div class="lex-popup-controls">
+        <button data-popup="decrease">A−</button>
+        <button data-popup="increase">A+</button>
+      </div>
+
+      <div class="lex-term" id="wp-word">–</div>
+
+      <div class="lex-section hidden" id="wp-class-wrap">
+        <div class="lex-heading">Ordklasse</div>
+        <div class="lex-text" id="wp-class"></div>
+      </div>
+
+      <div class="lex-section hidden" id="wp-grammar-wrap">
+        <div class="lex-heading">Bøyning</div>
+        <div class="lex-text" id="wp-grammar"></div>
+      </div>
+
+      <div class="lex-section">
+        <div class="lex-heading">Forklaring</div>
+        <div class="lex-text" id="wp-expl"></div>
+      </div>
+
+      <div class="lex-section hidden" id="wp-example-wrap">
+        <div class="lex-heading">Eksempel</div>
+        <div class="lex-text" id="wp-example"></div>
+      </div>
+
+    </div>
+  `;
+}
+
+/* ====================================================== */
+
+function ensurePopoverElement() {
+  let element = document.getElementById("word-popover");
+
+  if (element) {
+    if (!element.querySelector(".lex-popup")) {
+      element.innerHTML = createMarkup();
+    }
+    return element;
+  }
+
+  element = document.createElement("div");
+  element.id = "word-popover";
+  element.className = "word-popover hidden";
+  element.innerHTML = createMarkup();
+
+  document.body.appendChild(element);
+  return element;
+}
+
+/* ====================================================== */
+
+export function createPopover({ popupScale, lexService, state }) {
+
+  const element = ensurePopoverElement();
+
+  const popWord = element.querySelector("#wp-word");
+  const popExpl = element.querySelector("#wp-expl");
+
+  const popExample = element.querySelector("#wp-example");
+  const popExampleWrap = element.querySelector("#wp-example-wrap");
+
+  const popGrammar = element.querySelector("#wp-grammar");
+  const popGrammarWrap = element.querySelector("#wp-grammar-wrap");
+
+  const popClass = element.querySelector("#wp-class");
+  const popClassWrap = element.querySelector("#wp-class-wrap");
+
+  element.addEventListener("click", e => {
+    const btn = e.target.closest("[data-popup]");
+    if (!btn) return;
+    popupScale.adjust(btn.dataset.popup);
+  });
+
+  function hide() {
+    element.classList.add("hidden");
+  }
+
+  function isVisible() {
+    return !element.classList.contains("hidden");
+  }
+
+  async function show(wordEl, positionFn) {
+
+    if (!wordEl) return;
+
+    const word = normalizeWord(wordEl.textContent);
+    if (!word) return;
+
+    const lookupId = ++state.currentLookupId;
+
+    /* CONTEXT */
+
+    const sentenceText =
+      state?.activeSentence?.textContent?.trim() || "";
+
+    const paragraphText =
+      state?.activeSentence?.closest("p")?.textContent?.trim()
+      || sentenceText;
+
+    const words = state?.currentWords || [];
+    const index = words.indexOf(wordEl);
+
+    const contextObj = {
+      prev: normalizeWord(words[index - 1]?.textContent || ""),
+      next: normalizeWord(words[index + 1]?.textContent || ""),
+      sentence: sentenceText,
+      paragraph: paragraphText
+    };
+
+    /* UI: LOADING */
+
+    popWord.textContent = word;
+    popExpl.textContent = "Laster…";
+
+    popClassWrap.classList.add("hidden");
+    popGrammarWrap.classList.add("hidden");
+    popExampleWrap.classList.add("hidden");
+
+    element.classList.remove("hidden");
+
+    if (positionFn) positionFn(wordEl, element);
+
+    /* LOOKUP */
+
+    let data;
+
+    try {
+      data = await lexService.lookupWord(word, contextObj);
+    } catch (err) {
+      popExpl.textContent = "Feil ved oppslag.";
+      return;
+    }
+
+    if (lookupId !== state.currentLookupId) return;
+
+    /* RESULT */
+
+    if (!data || !data.found) {
+      popExpl.textContent = "Dette ordet er ikke forklart ennå.";
+      return;
+    }
+
+    popExpl.textContent = data.forklaring || "Ingen forklaring.";
+
+    if (data.word_class_label) {
+      popClass.textContent = data.word_class_label;
+      popClassWrap.classList.remove("hidden");
+    }
+
+    if (data.example) {
+      popExample.textContent = data.example;
+      popExampleWrap.classList.remove("hidden");
+    }
+
+    if (Array.isArray(data.grammar)) {
+
+      const rows = data.grammar
+        .filter(r => r?.value)
+        .map(r => `
+          <tr>
+            <th>${r.label}</th>
+            <td>${r.value}</td>
+          </tr>
+        `).join("");
+
+      if (rows) {
+        popGrammar.innerHTML = `<table>${rows}</table>`;
+        popGrammarWrap.classList.remove("hidden");
+      }
+    }
+
+    if (positionFn) positionFn(wordEl, element);
+  }
+
+  return { element, hide, isVisible, show };
+}

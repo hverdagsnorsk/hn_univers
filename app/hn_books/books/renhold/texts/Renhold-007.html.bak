@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tekst 7: Kjemikalier, risiko og faglig vurdering | Hverdagsnorsk</title>
+
+  
+  <!-- Leser 2026 – ENESTE STYLING -->
+  <link rel="stylesheet" href="/hn_books/engine/reader_2026.css?v=2026-locked">
+  <script src="/hn_books/engine/reader.js?v=2026-locked" defer></script>
+</head>
+
+<body>
+
+<div class="reader">
+
+  <header class="header">
+<img
+  src="/hn_admin/assets/fulllogo_transparent_nobuffer.png"
+  class="logo"
+  alt="Hverdagsnorsk logo"
+>
+  </header>
+
+  <!-- Leser-navigasjon (bygges av reader.js) -->
+  <nav class="reader-nav" data-back="../index.php"></nav>
+
+  <main class="book-container">
+    <section>
+
+      <!-- STØRRELSESVERKTØY – KUN HER -->
+      <div class="reader-tools">
+        <button data-action="decrease">A−</button>
+        <button data-action="reset">A</button>
+        <button data-action="increase">A+</button>
+      </div>
+
+      <!-- TITTEL FOR TEKSTEN -->
+      <h2>Tekst 7: Kjemikalier, risiko og faglig vurdering</h2>
+<figure class="section-controls">
+                      <audio controls preload="metadata">
+                        <source src="../audio/REN-7-1.m4a" type="audio/mp4">
+                      </source></audio>
+                    </figure>
+
+      <!-- SELVE TEKSTEN -->
+      
+<p data-start="433" data-end="693">Etter hendelsen med det glatte gulvet forstår Amina enda tydeligere hvor viktig riktig dosering er. Hun vet allerede at for mye vaskemiddel kan gjøre gulvet glatt og skape risiko for fall. Nå begynner hun å lære mer om selve kjemikaliene hun bruker i arbeidet.</p>
+<p data-start="695" data-end="958">På sykehuset er ikke rengjøring bare et spørsmål om å fjerne smuss. Det handler også om å redusere smitterisiko og beskytte både pasienter og ansatte mot helsefarlige stoffer. Derfor må alle kjemikalier brukes korrekt, i riktig konsentrasjon og til riktig formål.</p>
+<h2 data-start="960" data-end="1007"><br>Ulike typer kjemikalier i helseinstitusjoner</h2>
+<h2 data-start="960" data-end="1007"><figure class="section-controls">
+                      <audio controls preload="metadata">
+                        <source src="../audio/REN-7-2.m4a" type="audio/mp4">
+                      </source></audio>
+                    </figure></h2>
+<p data-start="1009" data-end="1064">I arbeidet bruker Amina flere typer kjemiske produkter:</p>
+<ul data-start="1066" data-end="1430">
+<li data-start="1066" data-end="1150">
+<p data-start="1068" data-end="1150"><strong data-start="1068" data-end="1098">Nøytrale rengjøringsmidler</strong> – brukes til daglig renhold av gulv og overflater</p>
+</li>
+<li data-start="1151" data-end="1218">
+<p data-start="1153" data-end="1218"><strong data-start="1153" data-end="1173">Alkaliske midler</strong> – effektive mot fett og organisk materiale</p>
+</li>
+<li data-start="1219" data-end="1287">
+<p data-start="1221" data-end="1287"><strong data-start="1221" data-end="1236">Sure midler</strong> – brukes til å fjerne kalk og mineralavleiringer</p>
+</li>
+<li data-start="1288" data-end="1356">
+<p data-start="1290" data-end="1356"><strong data-start="1290" data-end="1313">Desinfeksjonsmidler</strong> – reduserer eller dreper mikroorganismer</p>
+</li>
+<li data-start="1357" data-end="1430">
+<p data-start="1359" data-end="1430"><strong data-start="1359" data-end="1394">Spesialmidler for biologisk søl</strong> – brukes ved blod og kroppsvæsker</p>
+</li>
+</ul>
+<p data-start="1432" data-end="1653">Et desinfeksjonsmiddel er mer bakteriedrepende enn et vanlig rengjøringsmiddel, men det kan også være mer helsefarlig. Noen midler er mer konsentrerte enn andre, og feil bruk kan føre til både hudskader og luftveisplager.</p>
+<p data-start="1655" data-end="1773">Derfor må renholderen alltid vurdere:<br data-start="1692" data-end="1695">Hva er formålet? Hvilket smittenivå gjelder? Hvilken overflate skal behandles?</p>
+<h2 data-start="1775" data-end="1808"><br>Risikovurdering og verneutstyr</h2>
+<h2 data-start="1775" data-end="1808"><figure class="section-controls">
+                      <audio controls preload="metadata">
+                        <source src="../audio/REN-7-3.m4a" type="audio/mp4">
+                      </source></audio>
+                    </figure></h2>
+<p data-start="1810" data-end="1942">Amina har lært at alle kjemikalier er klassifisert etter faregrad. På emballasjen finner hun faresymboler som viser om produktet er:</p>
+<ul data-start="1944" data-end="2005">
+<li data-start="1944" data-end="1955">
+<p data-start="1946" data-end="1955">etsende</p>
+</li>
+<li data-start="1956" data-end="1971">
+<p data-start="1958" data-end="1971">irriterende</p>
+</li>
+<li data-start="1972" data-end="1987">
+<p data-start="1974" data-end="1987">brannfarlig</p>
+</li>
+<li data-start="1988" data-end="2005">
+<p data-start="1990" data-end="2005">miljøskadelig</p>
+</li>
+</ul>
+<p data-start="2007" data-end="2287">Et etsende middel er farligere enn et irriterende middel. Det kan skade hud og øyne raskere og mer alvorlig. Derfor bruker hun hansker, og ved behov også vernebriller. I rom med dårlig ventilasjon må hun være ekstra oppmerksom, fordi damp og aerosoler kan gi sterkere eksponering.</p>
+<p data-start="2289" data-end="2510">Langvarig eksponering for sterke kjemikalier kan føre til kroniske plager. Selv milde produkter kan bli skadelige dersom de brukes ofte og uten beskyttelse. Derfor er korrekt arbeidsmetode like viktig som selve produktet.</p>
+<h2 data-start="2512" data-end="2556"><br>Kjemiske reaksjoner og farlige blandinger</h2>
+<h2 data-start="1775" data-end="1808"><figure class="section-controls">
+                      <audio controls preload="metadata">
+                        <source src="../audio/REN-7-4.m4a" type="audio/mp4">
+                      </source></audio>
+                    </figure></h2>
+<p data-start="2558" data-end="2804">En viktig del av opplæringen handler om hva man <strong data-start="2606" data-end="2614">ikke</strong> skal gjøre. Enkelte kjemikalier må aldri blandes. For eksempel kan klor reagere med syrer og danne giftig klorgass. Denne gassen er betydelig farligere enn de enkelte stoffene hver for seg.</p>
+<p data-start="2806" data-end="3024">Derfor er det strengt forbudt å blande produkter uten klar instruksjon. Hvis en overflate ikke blir ren, skal man ikke «forsterke» effekten ved å kombinere midler. Man skal heller følge prosedyren eller kontakte leder.</p>
+<h2 data-start="3026" data-end="3053">Miljøhensyn og bærekraft</h2>
+<h2 data-start="1775" data-end="1808"><figure class="section-controls">
+                      <audio controls preload="metadata">
+                        <source src="../audio/REN-7-5.m4a" type="audio/mp4">
+                      </source></audio>
+                    </figure></h2>
+<p data-start="3055" data-end="3340">Feil bruk av kjemikalier påvirker ikke bare mennesker, men også miljøet. For høy dosering fører til unødvendig utslipp i avløpssystemet. Noen stoffer brytes ned raskere enn andre. Biologisk nedbrytbare produkter er mindre miljøbelastende enn produkter som blir værende lenge i naturen.</p>
+<p data-start="3342" data-end="3544">Sykehuset stiller derfor krav om korrekt dosering og bevisst forbruk. Effektiv rengjøring er ikke det samme som å bruke mest mulig middel. Det handler om å bruke riktig mengde – verken mer eller mindre.</p>
+<h2 data-start="3546" data-end="3579">Faglig ansvar og dokumentasjon</h2>
+<h2 data-start="1775" data-end="1808"><figure class="section-controls">
+                      <audio controls preload="metadata">
+                        <source src="../audio/REN-7-6.m4a" type="audio/mp4">
+                      </source></audio>
+                    </figure></h2>
+<p data-start="3581" data-end="3644">Som renholder har Amina et selvstendig faglig ansvar. Hun skal:</p>
+<ul data-start="3646" data-end="3761">
+<li data-start="3646" data-end="3681">
+<p data-start="3648" data-end="3681">følge produktets bruksanvisning</p>
+</li>
+<li data-start="3682" data-end="3710">
+<p data-start="3684" data-end="3710">bruke riktig verneutstyr</p>
+</li>
+<li data-start="3711" data-end="3732">
+<p data-start="3713" data-end="3732">dokumentere avvik</p>
+</li>
+<li data-start="3733" data-end="3761">
+<p data-start="3735" data-end="3761">melde fra ved usikkerhet</p>
+</li>
+</ul>
+<p data-start="3763" data-end="3931">Renhold i helseinstitusjoner er en del av pasientsikkerheten. Dersom kjemikalier brukes feil, kan konsekvensene bli alvorlige – både helsemessig, juridisk og økonomisk.</p>
+<p data-start="3933" data-end="4166">Jo mer kunnskap Amina får om kjemikalier, desto tryggere og mer profesjonell blir hun i arbeidet sitt. Hun forstår nå at riktig bruk av kjemikalier ikke bare handler om renhet. Det handler om sikkerhet, kvalitet og faglig kompetanse.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Hverdagsnorsk</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

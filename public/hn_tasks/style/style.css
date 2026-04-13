@@ -1,0 +1,89 @@
+body {
+  font-family: system-ui;
+  background: #f5f7f8;
+  margin: 0;
+}
+
+header {
+  background: #1f2f3a;
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+}
+
+header img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+}
+
+.question {
+  margin-bottom: 18px;
+  font-size: 18px;
+}
+
+.inline-input {
+  padding: 4px;
+  border: none;
+  border-bottom: 2px solid #2bbf9c;
+  background: transparent;
+}
+
+.correct {
+  color: green;
+  margin-left: 10px;
+}
+
+.wrong {
+  color: red;
+  margin-left: 10px;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  background: #2bbf9c;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.task {
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.task p {
+  margin: 0;
+}
+
+.feedback {
+  margin-top: 6px;
+  font-weight: bold;
+}
+
+.correct {
+  color: #1a7f37;
+}
+
+.wrong {
+  color: #c62828;
+}
+
+select {
+  padding: 4px 6px;
+  font-size: 14px;
+}

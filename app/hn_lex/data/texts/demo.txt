@@ -1,0 +1,165 @@
+1	HENSIKT
+Hensikten med å rapportere og behandle uønskede hendelser er å identifisere utløsende faktorer til at hendelsene inntreffer, og på bakgrunn av dette definere og iverksette tiltak slik at tilsvarende hendelser ikke oppstår igjen. 
+2	OMFANG
+Prosedyren gjelder for alle kategorier av uønskede hendelser. 
+3	ANSVAR
+Alle ansatte har plikt til å rapportere uønskede hendelser som avdekkes både i og utenfor eget arbeidsområde.
+4	GRUNNLAG
+Lovgrunnlag
+Arbeidsmiljøloven, internkontrollforskriften og forurensningsloven med tilhørende forskrifter.
+5	DEFINISJONER
+Avvik:
+Brudd på gjeldende krav i lover, forskrifter, interne instrukser/prosedyrer, mål og planer.
+Farlig forhold:
+Er en farlig tilstand eller farlig handling som kan føre til en nestenulykke eller en ulykke eller annen personskade.
+Nestenulykke:
+En plutselig og uventet hendelse som kunne ha ledet til skade på person, ytre miljø og/eller materielle skader, og som under litt andre forhold kunne ha ført til en skade/ulykke.
+Ulykke:
+En plutselig og uventet ytre påkjenning eller belastning som medfører skade på person, ytre miljø og/eller materielle skader.
+Personskade:
+Skade på person innen en eller flere av følgende kategorier: alvorlig personskade med varig mén, alvorlig personskade, medisinsk behandling som utføres av medisinsk personell, eller førstehjelpsskade. 
+
+
+Alvorlig personskade med varig mén:
+Skade på person som er varig og betydelig og som resulterer i tapt livsutfoldelse.
+Med «varig» menes skader som vedvarer i 10 år og oppover. Med «betydelig» menes her at skaden må medføre en medisinsk invaliditet på minst 15 %. For å vurdere om en skade er betydelig vurderes skaden av leger og spesialister og det tas utgangspunkt i invaliditetstabellen, som er laget av Arbeids- og sosialdepartementet. Skaden må være varig, betydelig og av medisinsk art. 
+Alvorlig personskade:
+Skade på person som medfører lengre tids nedsatt funksjonsevne. 
+Med nedsatt fuksnonsevne menes tap av eller skade på en kroppsdel eller i en av kroppens funksjoner. Dette kan for eksempel dreie seg om nedsatt bevegelses-, syns- eller hørselsfunksjon og nedsatt kognitiv funksjon.
+Andre eksempler: brudd på skjelett, hodeskade/kraftig hjernerystelse med tap av bevissthet, skader på indre organer, andre og tredje grads forbrenninger, skader som krever sykehusbehandling.
+Følgende defineres normalt ikke som alvorlig personskade, men som medisinsk behandling: Enkle brister eller brudd, som for eksempel på tær, fingre og ribbein, men også andre steder på kroppen, som kun krever konservativ behandling i form av smertelindrende gipsbehandling eller bandasje i en kortere periode. Enklere poliklinisk behandling defineres normalt ikke som alvorlig personskade.
+Medisinsk behandling:
+Behandling av skade som normalt foretas av medisinsk personell, som for eksempel sying av sår, utlevering av reseptpliktige medikamenter og lignende. Gjelder også behandling hos tannlege og øyeskader dersom medisinsk personell må bruke instrumenter for å fjerne fastsittende partikler på øye eller ved behandling av etseskader, sveiseblink og lignende.
+Følgende regnes ikke som medisinsk behandling, men førstehjelp:
+•	Medisinske undersøkelser som MR, CT og røntgen, overvåking/observasjon der det fastslås at medisinsk behandling ikke er nødvendig.
+•	Enkel skylling av øyne.
+•	Forebyggende behandling (tross i at medikamentet er reseptbelagt) som f.eks. stivkrampevaksinasjon, bruk av kloramfenikol (øyesalve) og bruk av andre antiseptika som har til hensikt å drepe bakterier på forurenset hud, slimhinner eller sår.
+
+
+Førstehjelpsskade:
+Mindre skade som ikke trenger behandling av medisinsk personell, men som den skadede behandler selv, eventuelt sammen med førstehjelpspersonell. Eksempler: bruk av øyeskyll for fjerning av mindre partikler eller kjemikalier, fjerne flis, plastre/forbinde mindre sår. Den ansatte kan ellers gjenoppta vanlig arbeid. 
+En skade er førstehjelpsskade selv om den behandles av medisinsk personell, dersom medvirkning fra medisinsk personell ikke er nødvendig.
+Eksempel på sistnevnte: En operatør blir utsatt for lavspent strømgjennomgang med sannsynlig strømvei gjennom kroppen. Det identifiseres ikke behov for førstehjelp på stedet. Han blir av Consolvo umiddelbart og rutinemessig transportert til sykehus. Sykehus velger å ha personen til overvåking i 24 timer. De avdekker ingen skader eller behov for behandling. Vi klassifiserer dette som førstehjelpsskade.
+Fraværsskade:
+Skade påført ved arbeidsulykke som er så alvorlig at det medfører fravær fra arbeidsplassen. Med fravær menes fravær fra arbeidsplassen fra og med dagen etter ulykken, eller senere dersom fraværet skyldes ulykken. Dødsfall som følge av en arbeidsulykke teller som en fraværsskade.
+Dersom den skadede benytter en eller flere av påfølgende arbeidsdager/skift etter ulykkesdagen til å oppsøke lege, foreta behandling eller gjennomgå overvåking som følge av skaden (poliklinisk), regnes ikke dette som en fraværsskade. Dersom vedkommende blir innlagt på sykehus eller andre institusjoner på grunn av skaden, telles dette som fravær. 
+5.1	Alternativt arbeid:
+Arbeid eller opplæringstiltak som er mulig gjennom at AF, eller annen involvert arbeidsgiver, endrer arbeidsoppgaver eller arbeidsforhold slik at personer med midlertidig redusert funksjonsevne, som følge av arbeidsulykke eller arbeidsrelatert sykdom/plage, likevel kan få arbeide.
+Personskade som følge av arbeidsulykke, som resulterer i midlertidig redusert funksjonsevne og alternativt arbeid, regnes ikke som skade med fravær og skal derfor ikke inngå i statistikken for H1-verdi, så lenge skaden ikke er i kategorien «alvorlig personskade» eller mer alvorlig, se egen beskrivelse.
+Følgende forutsetninger gjelder for alternativt arbeid etter arbeidsulykke:
+•	Skaden skal være av en slik art at restitusjon/ rehabilitering ikke forringes eller forlenges ved alternativt arbeid, sammenlignet med hvile hjemme eller opphold på sykehus o.l. En vurdering av dette skal gjøres i samarbeid mellom den skadede og arbeidsgiver/AF, samt i samråd med lege dersom skadetype og skadeomfang tilsier det.  
+•	Alternativt arbeid bør utføres på Consolvos arbeidsplass/ kontor, eller underentreprenørens arbeidsplass/ kontor. Dersom alternativt arbeid er opplæringstiltak som gjennomføres hos ekstern kursholder, så betraktes dette som alternativt arbeid selv om det ikke gjennomføres på arbeidsstedet. Arbeidstaker kan unntaksvis jobbe hjemmefra, dersom dette gir like gode eller bedre arbeidsforhold.
+•	Alternativt arbeid skal gjennomføres innenfor normal arbeidstid og arbeidet skal betraktes som meningsfylt både for den skadede og for arbeidsgiver. 
+•	Dersom den skadede bevisst ikke medvirker i planlegging og tilrettelegging for alternativt arbeid, slik at den skadede blir fraværende fra jobb, så vil man i ytterste konsekvens ikke kategorisere skaden som fraværsskade. Dette betinger at skaden ikke er alvorlig og at skaden utvilsomt er av en slik art at restitusjon/ rehabilitering ikke forringes eller forlenges ved alternativt arbeid.
+•	«Tilrettelagt arbeid» inngår ikke i definisjonen av alternativt arbeid. Tilrettelagt arbeid er tilpasninger som gjøres for at den skadede kan fortsette i sitt ordinære arbeid.
+6	Ytre miljø
+Skade på ytre miljø:
+Skade på ytre miljø kan forekomme innen en eller flere av følgende kategorier: katastrofal miljøskade, alvorlig varig miljøskade, alvorlig miljøskade, mindre alvorlig miljøskade eller neglisjerbar miljøskade. Med miljøskade menes enhver skade som har betydelige negative virkninger på arter og habitater, som har betydelige negative virkninger på vannets økologiske, kjemiske og/eller kvantitative tilstand, og/eller økologiske potensial, eller som forårsaker en betydelig risiko for at menneskers helse påvirkes negativt som følge av direkte eller indirekte innføring, i, på eller under jord, av stoffer, preparater, organismer eller mikroorganismer (overflate og grunnvann).
+6.1	Katastrofal miljøskade
+Regional miljøeksponering og/eller gjenoppretting mer enn 5 år. Permanente miljøskader. Stort ukontrollert utslipp. Resipient fullstendig skadet eller svekket. Kategorien gjelder også ødeleggelse av arkeologiske funn av betydelig størrelse. Med betydelig størrelse menes f.eks. knusing av et vikingskip eller ødeleggelse av et helt område som inneholdt mange og detaljerte runer. 
+Eksempel: Et tjern tømmes for vann på grunn av feil ved tunnelarbeider nedenfor. Økosystemet i tjernet bryter sammen. Sprekker i tunnelen tettes i tillegg med et stoff, som viser seg å være et høypotent giftstoff som forurenser grunnvannet til regionen. Fire nærliggende gårder må slakte alle dyr og legger ned driften i 12 år. Vi klassifiserer dette som katastrofal miljøskade på grunn av den geografiske eksponeringsgraden og gjenopprettingstiden.
+6.2	Alvorlig varig miljøskade
+Lokal miljøeksponering og/eller gjenoppretting 1 til 5 år. Svært alvorlige og langvarige miljøskader. Avsperring og stenging av områder er sannsynlig. Resipient skadet, og lite sannsynlig at denne av seg selv vil gjenopprettes. Kategorien gjelder også ødeleggelse av arkeologiske funn. I dette legger en at funnet ville vært viktig, men ikke unikt f.eks. på landsbasis.
+Eksempel: En betydelig mengde klor slippes ut høyt oppe i Akerselva, som renner igjennom Oslo by. All fisk og bunndyr dør i løpet av kort tid. Det tar 2 år før man kan bekrefte at elvens økosystem er gjenopprettet, ved hjelp av blant annet å sette ut en helt ny ørretstamme. Vi klassifiserer dette som alvorlig, varig miljøskade både på grunn av den geografiske eksponeringsgraden og gjenopprettingstiden.
+6.3	Alvorlig miljøskade
+Miljøeksponering på anlegget eller byggeplassen og/eller gjenoppretting 1 mnd. - 1 år. Alvorlige og langvarige miljøskader. Betydelig utslipp innenfor gitte rammer. Avsperring og stenging av området kan forekomme. Mulig å bevise skade i resipient, historisk eller etter stedlige undersøkelser.
+Eksempel: Olje fra renner og spilloljetank flyter utover et dekke når en fibertank blir klippet opp. Ca. 200 liter fyringsolje går i grunnen og må samles opp maskinelt. Oppryddingen tar 5 uker. Målinger foretatt i ettertid viser ingen antydning til forurensning av grunnen. Vi klassifiserer dette som alvorlig miljøskade både på grunn av den geografiske eksponeringsgraden og gjenopprettingstiden.
+6.4	Mindre alvorlig miljøskade
+Miljøeksponering på anlegget eller byggeplassen og/eller gjenoppretting innen 1 dag – 1 mnd. Betydelige miljøskader. Mindre uønsket utslipp. Registrerbar skade i resipient, men ikke med alvorlig omfang.
+Eksempel: Oljeskimmer (diesel) observert på sjøen på utsiden av kai.  Det viste seg at oljen kom i jevnt sig sammen med vann fra et utløp. Det ble lagt ut lenser i et stort område rundt utløpet. Man regner med at < 20 liter diesel ble sluppet ut og deretter fanget opp rett utenfor kaien. Sikkerhetsdatabladet til dieselen bemerker at produktet er lett biologisk nedbrytbart og at det fordamper lett i løpet av noen få dager. Lenseutstyret blir pakket sammen etter 3 dager.
+Vi klassifiserer dette som mindre alvorlig miljøskade både på grunn av den geografiske eksponeringsgraden og gjenopprettingstiden. 
+6.5	Neglisjerbar miljøskade
+Neglisjerbar miljøskade og/eller gjenopprettingstid. Gjenoppretting innen 0 – 1 dag.
+Utslipp eller miljøskader på/til ytre miljø som kan gjenopprettes ved hjelp av maskiner, lenser eller annet utstyr, eller som består av en ufarlig type, mengde eller konsentrasjon kjemikalier eller stoff.  Uavhengig av størrelse og volum, sier vi at utslippet er neglisjerbart dersom hele utslippet blir samlet og fjernet på en forsvarlig måte innen kort tid.
+Eksempel 1: Rester av olje og bensin renner ut på et tett betongdekke. Utslippet blir gjenopprettet i løpet av to timer, med absorberende duker og egnede kjemikalier. Vi klassifiserer dette som neglisjerbar miljøskade på grunn av at forholdene og tiltakene gjør at oljen aldri når grunnen.
+
+
+
+7	BESKRIVELSE
+7.1	Varsling, rapportering og oppfølging av avvik og farlige forhold
+Dette kan være for eksempel brudd på en SJA/instruks, feil i en instruks eller prosedyre, manglende bruk av verneutstyr, manglende sikkerhetsbarrierer eller andre farlige forhold/hendelser.
+•	Avviket eller forholdet rettes på stedet hvis dette er mulig eller hensiktsmessig
+•	Avviket eller forholdet rapporteres gjennom rapporteringsskjema (RUH) på papir eller via Smartdok, der det gis beskrivelse av avviket/forholdet, årsaker, utførte tiltak eller forslag til tiltak
+7.2	Varsling, rapportering og oppfølging av nestenulykker
+Dette kan være situasjoner hvor en ulykke avverges” i siste liten”, flaks gjør at situasjonen ikke ender i en ulykke, branntilløp som slukkes, utslipp som fanges opp før det gjør skade, osv.
+•	Den som erfarer eller gjør seg kjent med nestenulykken, varsler anleggsleder/prosjektleder eller nærmeste leder som i samarbeid iverksetter korrigerende strakstiltak for å hindre eventuell gjentakelse eller utvikling av hendelsen
+•	Anleggsleder/prosjektleder varsler til daglig leder/HMS-sjef
+•	Hendelsen rapporteres gjennom rapporteringsskjema (RUH) på papir eller via Smartdok, der det gis beskrivelse av hendelsen, årsaker, og utførte tiltak eller forslag til tiltak
+•	HMS-sjef vurderer om hendelsen skal gjennomgå videre gransking 
+7.3	Varsling, rapportering og oppfølging av ulykker
+Dette kan være ulykker som har ledet til personskader, brann, akutt forurensning, materielle eller bygningsmessige skader etc.
+•	Den som erfarer eller gjør seg kjent med ulykken varsler i henhold til prosjektets beredskaps- og varslingsplan
+•	Den/de personer som er i nærheten skal handle i henhold til aksjonspunkter i prosjektets beredskapsplan
+•	Anleggsleder/prosjektleder varsler om hendelsen til HMS-sjef eller daglig leder
+•	DL/HMS-sjef vurderer videre oppfølging i henhold til beredskapsplan 2. linje, og eventuell etablering av krisestab
+•	Avslutningsvis skal ulykker med alvorlig personskade, alvorlig miljøskade eller høyt tapspotensiale granskes av granskningsgruppe
+
+7.4	Varsling, rapportering og oppfølging av andre personskader
+Med andre personskader menes skader som har oppstått uten at det er skjedd noe ulykkesartet. Dette kan for eksempel være klem- eller kuttskader, overtråkk eller forstuing, fremmedlegemer på øyet, etc.
+•	Nødvendige førstehjelpstiltak utføres på den skadede
+•	Den som er påført eller gjort kjent med skaden, varsler AL/PL eller nærmeste leder umiddelbart
+•	AL/PL varsler umiddelbart hendelsen til HMS-sjef eller daglig leder for vurdering av videre tiltak
+•	Ved behov for medisinsk behandling, skal så langt det lar seg gjøre, en kollega følge den skadede til legevakt eller sykehus
+•	Prosjektledelse i kommunikasjon med personalansvarlig og helsetjeneste, skal vurdere alternativt arbeid i henhold til prosedyre
+•	Skaden rapporteres gjennom rapporteringsskjema (RUH) på papir eller via Smartdok, der det gis beskrivelse av hendelsen, årsaker, utførte tiltak eller forslag til tiltak
+7.5	Årsaksanalyse
+H1-hendelser og hendelser med tapspotensiale K4 og K5 krever egen granskning iht. Prosedyre Gransking og oppfølging av alvorlige hendelser.
+8	TAPSPOTENSIALE, DEFINISJONER
+Rød hendelse:
+Uønsket hendelse med stort tapspotensiale, som kunne ha forårsaket alvorlig personskade med varig mén eller død, alvorlig varig skade på ytre miljø eller katastrofal miljøskade, store materielle skader eller alvorlig og langvarig sykdom eller død.
+Gul hendelse:
+Uønsket hendelse med middels tapspotensiale, som kunne ha forårsaket alvorlig personskade, alvorlig skade på ytre miljø, materiell skade eller alvorlig sykdom, med mindre omfang enn ved røde hendelse.
+Grønn hendelse:
+Uønsket hendelse med lavt tapspotensiale, som kunne ha forårsaket mindre skade på personer, ytre miljø, materiell eller sykdom eller plage.
+
+ 
+9	UTTRYKK OG FREKVENSER
+H1-hendelse:
+H1-hendelse er en arbeidsulykke som medfører fravær, alvorlig personskade, alvorlig personskade med varig mén eller død.
+Ved usikkerhet om en arbeidsulykke med personskade skal klassifiseres som H1-hendelse eller ikke, skal HMS Konsern konfereres i saken. Direktør HMS har mandat til å beslutte endelig klassifisering i tvilstilfeller.
+H1-verdi:	
+H1-verdi uttrykker hyppigheten av arbeidsulykker som medfører fravær, alvorlig personskade, alvorlig personskade med varig mén og død. H1-verdi defineres som antall H1-hendelser per 1 million arbeidede timer. H1-verdien inkluderer også samme type hendelser hos underentreprenører og leverandører som utfører kontraktsarbeid for Consolvo på Consolvos arbeidsplass.
+Arbeidsulykker som skal inkluderes i H1-verdien må dokumenteres med sykmelding eller uttalelse fra lege.
+H1-verdi =    H1-hendelser x 1 million
+                 totalt antall arbeidede timer
+
+Timer:
+Antall arbeidede timer for samtlige fast ansatte og innleide i Consolvo, samt ansatte og innleide hos underentreprenører og leverandører som utfører kontraktsarbeid for Consolvo på Consolvos arbeidssted. Consolvo tar utgangspunkt i fast timeantall på 37,5 timer per uke.
+Gjelder ikke timer tilknyttet UE-arbeid og -oppdrag som skjer utenfor Consolvos arbeidssted og ansvarsområde. Typiske eksempler kan være prosjektering, konsulentarbeid, samt tilvirking av produkter på utsiden av våre kontorer og prosjekter.
+H2-hendelse:
+
+H2-hendelse er en arbeidsulykke som medfører medisinsk behandling og/eller alternativt arbeid.
+H2-verdi:
+
+Totalt antall H1- og H2-hendelser per million arbeidede timer. H2-verdien utgjør dermed summen av H1- og H2-hendelser.
+H2 = (antall H1-hendelser + H2-hendelser) x 1 million
+                         totalt antall arbeidede timer
+H3-hendelse:
+
+H3-hendelse er en arbeidsulykke og som medfører førstehjelp.
+H3-verdi:
+
+Totalt antall H1-, H2-, og H3-hendelser per million arbeidede timer. H3-verdien utgjør dermed summen av H1-, H2- og H3-hendelser.
+H3 = (antall H1-hendelser + H2-hendelser + H3-hendelser) x 1 million
+                                       totalt antall arbeidede timer
+F-verdi:
+
+Antall fraværsdager (som følge av fraværsskader) per million arbeidede timer. Maks antall fraværsdager per fraværsskade settes til 230 dager, det vil si ett års fravær. Ved dødsfall regnes også 230 dager.
+
+RUH-frekvens:
+
+Antall RUH per årsverk.  
+Formel: Antall RUH x 1 730 timer
+            Totalt antall arbeidede timer
+Safetalk-frekvens:
+
+Antall Safetalk per årsverk.  
+Formel: Antall Safetalk x 1 730 timer
+               Totalt antall arbeidede timer
+N-verdi:
+Antall RUH per million arbeidede timer.
+N-verdi =     antall RUH x 1 million
+                  totalt antall arbeidede timer
+(P.S.: Enkelte aktører/kunder kan ha følgende definisjon: N-verdi = antall nestenulykker per million arbeidede timer)
+
+

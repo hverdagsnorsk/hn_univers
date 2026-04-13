@@ -1,0 +1,313 @@
+/* ==========================================================
+   HN CORE DESIGN SYSTEM – CLEAN FOUNDATION
+========================================================== */
+
+/* ==========================================================
+   TOKENS
+========================================================== */
+
+:root {
+
+    /* Brand */
+    --hn-primary: #2f8485;
+    --hn-primary-hover: #266e6f;
+    --hn-primary-light: #9AC5C5;
+
+    --hn-secondary: #3C6464;
+    --hn-secondary-light: #8CBCBC;
+
+    /* Neutrals */
+    --hn-bg: #F4F6F6;
+    --hn-surface: #ffffff;
+    --hn-border: #D0D3D3;
+
+    --hn-text: #484042;
+    --hn-text-muted: #6b6466;
+
+    /* Radius */
+    --hn-radius-sm: 8px;
+    --hn-radius-md: 14px;
+    --hn-radius-lg: 20px;
+
+    /* Shadow */
+    --hn-shadow-soft: 0 8px 24px rgba(0,0,0,.05);
+    --hn-shadow-hover: 0 16px 40px rgba(0,0,0,.08);
+
+    /* Layout */
+    --hn-container: 1240px;
+}
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--hn-bg);
+    color: var(--hn-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    margin: 0 0 0.6em 0;
+}
+
+p {
+    margin: 0 0 1em 0;
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+a {
+    color: var(--hn-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: .15s ease;
+}
+
+a:hover {
+    color: var(--hn-secondary);
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.hn-container {
+    max-width: var(--hn-container);
+    margin: 0 auto;
+    padding: 40px 32px;
+}
+
+/* ==========================================================
+   HEADER (PUBLIC)
+========================================================== */
+
+.hn-header {
+    background: var(--hn-surface);
+    border-bottom: 1px solid var(--hn-border);
+}
+
+.hn-header-inner {
+    max-width: var(--hn-container);
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ==========================================================
+   NAV (PUBLIC)
+========================================================== */
+
+.hn-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.hn-nav a {
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.hn-nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--hn-primary);
+    border-radius: 2px;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.hn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: var(--hn-radius-md);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+.hn-btn-primary {
+    background: var(--hn-primary);
+    color: #fff;
+}
+
+.hn-btn-primary:hover {
+    background: var(--hn-primary-hover);
+}
+
+.hn-btn-light {
+    background: #f1f5f9;
+    color: var(--hn-text);
+}
+
+.hn-btn-light:hover {
+    background: #e2e8f0;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.hn-card {
+    background: var(--hn-surface);
+    border-radius: var(--hn-radius-lg);
+    padding: 28px;
+    border: 1px solid var(--hn-border);
+    box-shadow: var(--hn-shadow-soft);
+    transition: .2s ease;
+}
+
+.hn-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hn-shadow-hover);
+}
+
+/* ==========================================================
+   TABLE
+========================================================== */
+
+.hn-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--hn-surface);
+    border-radius: var(--hn-radius-md);
+    overflow: hidden;
+}
+
+.hn-table th,
+.hn-table td {
+    padding: 14px 16px;
+    text-align: left;
+}
+
+.hn-table thead {
+    background: #eef3f3;
+    font-weight: 600;
+}
+
+.hn-table tbody tr {
+    border-top: 1px solid #edf1f2;
+}
+
+.hn-table tbody tr:hover {
+    background: #f9fbfb;
+}
+
+/* ==========================================================
+   FORMS (BASE)
+========================================================== */
+
+.hn-input,
+.hn-select,
+.hn-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--hn-radius-sm);
+    border: 1px solid var(--hn-border);
+    font-size: 0.95rem;
+    background: var(--hn-surface);
+    transition: border .2s ease, box-shadow .2s ease;
+}
+
+.hn-input:focus,
+.hn-select:focus,
+.hn-textarea:focus {
+    outline: none;
+    border-color: var(--hn-primary);
+    box-shadow: 0 0 0 3px rgba(47,132,133,0.12);
+}
+
+
+/* ==========================================
+   TOPBAR (MODERN)
+========================================== */
+
+.hn-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #eef2f2;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.hn-topbar-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hn-logo img {
+    height: 42px;
+}
+
+.hn-nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.hn-nav a {
+    font-weight: 600;
+    color: var(--hn-text-muted);
+    transition: .15s ease;
+}
+
+.hn-nav a:hover {
+    color: var(--hn-primary);
+}
+
+.hn-admin-link {
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: var(--hn-primary);
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   FOOTER (PUBLIC)
+========================================================== */
+
+.hn-footer {
+    margin-top: 80px;
+    background: var(--hn-surface);
+    border-top: 1px solid var(--hn-border);
+}
+
+.hn-footer-inner {
+    max-width: var(--hn-container);
+    margin: 0 auto;
+    padding: 40px 32px;
+    text-align: center;
+    color: var(--hn-text-muted);
+}

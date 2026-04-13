@@ -1,0 +1,35 @@
+<h1> Hvordan</h1>
+
+<div class="hvordan-two-col">
+  <img src="/assets/zoom1.jpg" alt="Zoom-møte på skjerm">
+  <div class="hvordan-text">
+    <b>Lær norsk via Zoom – uansett hvor du er i verden</b><br>
+    Delta fra hjemmet ditt, en kafé eller til og med fra stranden.<br><br>
+    <b>Undervisning med lærer i sanntid </b><br>
+    Du følger faste timer og får direkte oppfølging.<br><br>
+    <b> Bruk helst PC med kamera og mikrofon</b><br>
+    Nettbrett eller mobil kan også brukes, men PC gir best opplevelse.
+  </div>
+</div>
+
+<div class="hvordan-two-col">
+  <img src="/assets/zoom2.jpg" alt="Elev i klasserom">
+  <div class="hvordan-text">
+    <b>Enkelt å komme i gang – bare trykk på en link</b><br>
+    Zoom håndterer resten – ingen kompliserte installasjoner.<br><br>
+    <b>Interaktiv læring – som å være i et klasserom</b> <br>
+    Still spørsmål, delta i diskusjoner og øv deg sammen med andre.
+  </div>
+</div>
+
+<div class="hvordan-two-col">
+  <img src="/assets/zoom3.jpg" alt="Språklæring på laptop">
+  <div class="hvordan-text">
+    <b>Forbedre norskkunnskapene dine raskt</b> <br>
+    Lær gjennom samtaler, oppgaver og praktisk språbruk.<br><br>
+    <b>Finn veien til faglig og personlig utvikling</b> <br>
+    Bli tryggere i norsk, både på jobb og i hverdagen..<br><br>
+    <b>Når timen er over, er du allerede hjemme!</b> <br>
+    Ingen reisetid – bare effektiv undervisning.
+  </div>
+</div>

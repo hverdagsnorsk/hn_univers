@@ -1,0 +1,245 @@
+<?php
+declare(strict_types=1);
+
+require_once __DIR__ . '/bootstrap.php';
+
+/* ======================================================
+   INIT
+====================================================== */
+
+$error   = '';
+$success = '';
+
+$layout_mode = 'admin';
+$page_title  = 'Opprett ny tekst';
+
+/* ======================================================
+   HENT BØKER (AUTORITET = FILSYSTEM)
+====================================================== */
+
+$books = get_books();
+
+/* ======================================================
+   HJELPERE
+====================================================== */
+
+function normalize_key(string $s): string
+{
+    $s = trim($s);
+    $s = preg_replace('/\s+/', '-', $s);
+    $s = preg_replace('/[^A-Za-z0-9\-]/', '', $s);
+    $s = preg_replace('/\-+/', '-', $s);
+    return strtolower(trim($s, '-'));
+}
+
+function next_text_key(PDO $pdo, string $bookKey): string
+{
+    $stmt = $pdo->prepare("
+        SELECT text_key
+        FROM texts
+        WHERE book_key = :bk
+        ORDER BY id DESC
+        LIMIT 200
+    ");
+    $stmt->execute(['bk' => $bookKey]);
+
+    $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $max = 0;
+    foreach ($rows as $tk) {
+        if (preg_match('/-(\d{3})$/', (string)$tk, $m)) {
+            $n = (int)$m[1];
+            if ($n > $max) $max = $n;
+        }
+    }
+
+    $next = $max + 1;
+
+    return ucfirst($bookKey) . '-' . str_pad((string)$next, 3, '0', STR_PAD_LEFT);
+}
+
+/* ======================================================
+   POST
+====================================================== */
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $bookKeySelected = trim($_POST['book_key_select'] ?? '');
+    $bookKeyNew      = trim($_POST['book_key_new'] ?? '');
+
+    if ($bookKeySelected !== '') {
+        $bookKey = normalize_key($bookKeySelected);
+    } elseif ($bookKeyNew !== '') {
+        $bookKey = normalize_key($bookKeyNew);
+    } else {
+        $error = 'Du må velge eksisterende bok eller skrive ny.';
+    }
+
+    $title   = trim($_POST['title'] ?? '');
+    $level   = trim($_POST['level'] ?? '');
+    $rawText = trim($_POST['raw_text'] ?? '');
+
+    if (!$error && ($title === '' || $rawText === '')) {
+        $error = 'Tittel og tekst må fylles ut.';
+    }
+
+    if (!$error) {
+
+        require_once __DIR__ . '/text_generate.php';
+
+        try {
+
+            $textKey = next_text_key($pdo, $bookKey);
+
+            $sourcePath = generate_text_html(
+                bookKey: $bookKey,
+                textKey: $textKey,
+                title:   $title,
+                rawText: $rawText,
+                level:   ($level !== '' ? $level : null)
+            );
+
+            $stmt = $pdo->prepare("
+                INSERT INTO texts (
+                    book_key,
+                    text_key,
+                    title,
+                    level,
+                    source_path,
+                    active,
+                    created_at
+                ) VALUES (
+                    :book_key,
+                    :text_key,
+                    :title,
+                    :level,
+                    :source_path,
+                    1,
+                    NOW()
+                )
+            ");
+
+            $stmt->execute([
+                'book_key'    => $bookKey,
+                'text_key'    => $textKey,
+                'title'       => $title,
+                'level'       => ($level !== '' ? $level : null),
+                'source_path' => $sourcePath
+            ]);
+
+            $success = "Tekst opprettet: {$sourcePath}";
+
+        } catch (Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
+}
+
+/* ======================================================
+   LAYOUT
+====================================================== */
+
+require_once dirname(__DIR__) . '/hn_core/layout/header.php';
+?>
+
+<main class="page admin-page">
+
+<header class="page-header">
+    <h1>Opprett ny tekst</h1>
+    <p class="page-intro">
+        Velg bok → skriv tittel → lim inn tekst → generer.
+    </p>
+</header>
+
+<section class="admin-card-section admin-text-create">
+
+<?php if ($error !== ''): ?>
+    <div class="alert-error"><?= h($error) ?></div>
+<?php endif; ?>
+
+<?php if ($success !== ''): ?>
+    <div class="alert-success"><?= h($success) ?></div>
+<?php endif; ?>
+
+<form method="post" class="text-create-form" novalidate>
+
+    <!-- 1. BOK -->
+
+    <div class="form-block">
+        <h3>1. Bok</h3>
+
+        <label for="book_key_select">Velg eksisterende bok</label>
+        <select id="book_key_select" name="book_key_select">
+            <option value="">Velg eksisterende bok …</option>
+            <?php foreach ($books as $bk): ?>
+                <option value="<?= h((string)$bk) ?>">
+                    <?= h((string)$bk) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <div class="divider">eller</div>
+
+        <label for="book_key_new">Opprett ny bok</label>
+        <input
+            id="book_key_new"
+            name="book_key_new"
+            placeholder="f.eks. consolvo2"
+        >
+    </div>
+
+    <!-- 2. METADATA -->
+
+    <div class="form-block horizontal">
+
+        <div>
+            <label for="level">Nivå (valgfritt)</label>
+            <input
+                id="level"
+                name="level"
+                placeholder="A2 / B1 / B2"
+            >
+        </div>
+
+        <div>
+            <label for="title">Tittel</label>
+            <input
+                id="title"
+                name="title"
+                required
+            >
+        </div>
+
+    </div>
+
+    <!-- 3. TEKST -->
+
+    <div class="form-block">
+        <h3>2. Tekstinnhold</h3>
+
+        <label for="raw_text" class="visually-hidden">Tekstinnhold</label>
+
+        <textarea
+            id="raw_text"
+            name="raw_text"
+            class="text-editor"
+            required
+            placeholder="Lim inn teksten her...
+
+Bruk [[LYD]] der du vil starte ny lydfil."
+        ></textarea>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-primary btn-large">
+            Generer tekst
+        </button>
+    </div>
+
+</form>
+
+</section>
+
+</main>
+
+<?php require_once dirname(__DIR__) . '/hn_core/layout/footer.php'; ?>

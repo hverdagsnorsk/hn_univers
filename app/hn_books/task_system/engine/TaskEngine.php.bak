@@ -1,0 +1,476 @@
+<?php
+declare(strict_types=1);
+
+require_once __DIR__.'/TextExtractor.php';
+require_once __DIR__.'/LexLookup.php';
+require_once __DIR__.'/MorphologyLookup.php';
+require_once __DIR__.'/SyntaxAnalyzer.php';
+require_once __DIR__.'/TaskDifficulty.php';
+
+final class TaskEngine
+{
+    private LexLookup $lex;
+    private MorphologyLookup $morph;
+    private SyntaxAnalyzer $syntax;
+
+    private array $stopWords = [
+        "og","i","på","det","den","er","som","en","et","til",
+        "for","med","av","å","hun","han","de","vi","jeg"
+    ];
+
+    public function __construct(PDO $pdoLex)
+    {
+        $this->lex = new LexLookup($pdoLex);
+        $this->morph = new MorphologyLookup($pdoLex);
+        $this->syntax = new SyntaxAnalyzer();
+    }
+
+    public function generate(string $book,string $textKey,string $html): array
+    {
+
+        $text = TextExtractor::extractMainText($html);
+
+        $level = TaskDifficulty::detectLevel($text);
+
+        $sentences = $this->splitSentences($text);
+
+        $words = $this->extractWords($text);
+
+        $lexInfo = $this->lex->lookupWords($words);
+
+        $tasks = [];
+
+        $tasks = array_merge(
+
+            $this->readingTasks($sentences),
+            $this->multipleChoiceTasks($sentences),
+            $this->trueFalseTasks($sentences),
+            $this->fillTasks($sentences),
+            $this->wordOrderTasks($sentences),
+            $this->verbInflectionTasks($lexInfo),
+            $this->nounInflectionTasks($lexInfo),
+            $this->prepositionTasks($sentences),
+            $this->errorCorrectionTasks($sentences),
+            $this->syntaxTasks($sentences),
+            $this->writingTask()
+
+        );
+
+        return [
+            "book"=>$book,
+            "text"=>$textKey,
+            "level"=>$level,
+            "tasks"=>$tasks
+        ];
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function splitSentences(string $text): array
+    {
+
+        $parts = preg_split('/[.!?]/u',$text);
+
+        $out=[];
+
+        foreach($parts as $p){
+
+            $p = trim($p);
+
+            if(mb_strlen($p) > 25){
+                $out[] = $p;
+            }
+
+        }
+
+        return $out;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function extractWords(string $text): array
+    {
+
+        preg_match_all('/\p{L}+/u',mb_strtolower($text),$m);
+
+        $words = $m[0] ?? [];
+
+        return array_values(
+            array_diff($words,$this->stopWords)
+        );
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function readingTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach(array_slice($sentences,0,5) as $s){
+
+            $tasks[]=[
+
+                "type"=>"reading",
+
+                "sentence"=>$s,
+
+                "question"=>"Hva forteller denne setningen?"
+
+            ];
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function multipleChoiceTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach(array_slice($sentences,0,6) as $s){
+
+            $tasks[]=[
+
+                "type"=>"multiple_choice",
+
+                "question"=>"Hva handler denne setningen om?",
+
+                "sentence"=>$s,
+
+                "options"=>[
+                    "En aktivitet",
+                    "Et sted",
+                    "En handling"
+                ]
+
+            ];
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function trueFalseTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach(array_slice($sentences,0,6) as $s){
+
+            $tasks[]=[
+
+                "type"=>"true_false",
+
+                "statement"=>$s,
+
+                "task"=>"Er denne setningen riktig?"
+
+            ];
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function fillTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach($sentences as $s){
+
+            $words = preg_split('/\s+/u',$s);
+
+            if(count($words) < 6){
+                continue;
+            }
+
+            $candidates=[];
+
+            foreach($words as $i=>$w){
+
+                $clean = mb_strtolower($w);
+
+                if(!in_array($clean,$this->stopWords)){
+                    $candidates[]=$i;
+                }
+
+            }
+
+            if(!$candidates){
+                continue;
+            }
+
+            $i = $candidates[array_rand($candidates)];
+
+            $answer = $words[$i];
+
+            $words[$i] = "_____";
+
+            $tasks[]=[
+
+                "type"=>"fill",
+
+                "sentence"=>implode(" ",$words),
+
+                "answer"=>$answer
+
+            ];
+
+            if(count($tasks) >= 8){
+                break;
+            }
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function wordOrderTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach(array_slice($sentences,0,5) as $s){
+
+            $words = preg_split('/\s+/u',$s);
+
+            if(count($words) < 4){
+                continue;
+            }
+
+            $scrambled = $words;
+
+            shuffle($scrambled);
+
+            $tasks[]=[
+
+                "type"=>"word_order",
+
+                "scrambled"=>implode(" ",$scrambled),
+
+                "answer"=>$s
+
+            ];
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function verbInflectionTasks(array $lexInfo): array
+    {
+
+        $tasks=[];
+
+        foreach($lexInfo as $row){
+
+            if(($row["pos"] ?? "") !== "verb"){
+                continue;
+            }
+
+            $forms = $this->morph->getVerbForms($row["lemma"]);
+
+            if(!$forms){
+                continue;
+            }
+
+            $tasks[]=[
+
+                "type"=>"verb_inflection",
+
+                "lemma"=>$row["lemma"],
+
+                "forms"=>$forms
+
+            ];
+
+            if(count($tasks) >= 6){
+                break;
+            }
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function nounInflectionTasks(array $lexInfo): array
+    {
+
+        $tasks=[];
+
+        foreach($lexInfo as $row){
+
+            if(($row["pos"] ?? "") !== "noun"){
+                continue;
+            }
+
+            $forms = $this->morph->getNounForms($row["lemma"]);
+
+            if(!$forms){
+                continue;
+            }
+
+            $tasks[]=[
+
+                "type"=>"noun_inflection",
+
+                "lemma"=>$row["lemma"],
+
+                "forms"=>$forms
+
+            ];
+
+            if(count($tasks) >= 6){
+                break;
+            }
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function prepositionTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        $preps=["i","på","til","fra","med"];
+
+        foreach($sentences as $s){
+
+            foreach($preps as $p){
+
+                if(str_contains(" ".$s." "," ".$p." ")){
+
+                    $q = str_replace(" ".$p." "," _____ ",$s);
+
+                    $tasks[]=[
+
+                        "type"=>"preposition",
+
+                        "sentence"=>$q,
+
+                        "answer"=>$p
+
+                    ];
+
+                    break;
+
+                }
+
+            }
+
+            if(count($tasks) >= 6){
+                break;
+            }
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function errorCorrectionTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach(array_slice($sentences,0,4) as $s){
+
+            $tasks[]=[
+
+                "type"=>"correct_error",
+
+                "sentence"=>$s,
+
+                "task"=>"Finn en mulig feil i setningen."
+
+            ];
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function syntaxTasks(array $sentences): array
+    {
+
+        $tasks=[];
+
+        foreach($sentences as $s){
+
+            $sub = $this->syntax->detectSubordinate($s);
+
+            if($sub){
+
+                $tasks[]=[
+
+                    "type"=>"subjunction",
+
+                    "sentence"=>$s,
+
+                    "question"=>"Hvilken subjunksjon brukes?"
+
+                ];
+
+            }
+
+            if(count($tasks) >= 4){
+                break;
+            }
+
+        }
+
+        return $tasks;
+
+    }
+
+    /* -------------------------------------------------- */
+
+    private function writingTask(): array
+    {
+
+        return [
+
+            [
+                "type"=>"writing",
+                "task"=>"Skriv 4–6 setninger om temaet i teksten."
+            ]
+
+        ];
+
+    }
+
+}

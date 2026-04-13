@@ -1,0 +1,169 @@
+/* ============================================================
+   HVERDAGSNORSK — Brand Style Edition
+   Basert på offisiell fargepalett
+   ============================================================ */
+
+:root {
+  --font-body: 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Merriweather', Georgia, serif;
+
+  /* Merkevarefarger */
+  --color-primary: #2F8485;
+  --color-secondary: #3C6464;
+  --color-light: #8CBCBC;
+  --color-muted: #9AC5C5;
+  --color-bg: #D0D3D3;
+  --color-text: #484042;
+  --color-border: #9AC5C5;
+  --color-footer: #E8EAEA;
+  --max-width: 850px;
+}
+
+/* ---------- Grunnstruktur ---------- */
+body {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background-color: #F8FAFA;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+.header {
+  background: linear-gradient(90deg, var(--color-light), var(--color-muted));
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-bottom: 3px solid var(--color-primary);
+  color: white;
+}
+
+.logo {
+  max-height: 70px;
+  margin-bottom: 0.5rem;
+}
+
+.header h1 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: white;
+  margin: 0.5rem 0 0 0;
+}
+
+/* ---------- Bokcontainer ---------- */
+.book-container {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.book-container h2 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-muted);
+  padding-bottom: 0.3rem;
+  margin-top: 2.5rem;
+}
+
+/* ---------- Tekstblokker ---------- */
+p {
+  margin: 1rem 0;
+  color: var(--color-text);
+}
+
+.text-block {
+  margin-bottom: 1.2rem;
+}
+
+b {
+  color: var(--color-secondary);
+}
+
+/* ---------- Kontroller ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 1rem 0 2rem;
+}
+
+.controls button,
+.controls .btn-link {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.controls button:hover,
+.controls .btn-link:hover {
+  background-color: var(--color-secondary);
+}
+
+/* ---------- Seksjoner ---------- */
+section {
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+/* ---------- Lydkontroller ---------- */
+.section-controls {
+  margin: 1rem 0;
+  text-align: left;
+  background-color: var(--color-bg);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+audio {
+  width: 100%;
+  outline: none;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background-color: var(--color-footer);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  padding: 1rem;
+  margin-top: auto;
+  border-top: 2px solid var(--color-primary);
+}
+
+footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsivitet ---------- */
+@media (max-width: 700px) {
+  body {
+    font-size: 1rem;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- Lesemodus ---------- */
+.large-tex

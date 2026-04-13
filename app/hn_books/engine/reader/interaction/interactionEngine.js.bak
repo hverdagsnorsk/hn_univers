@@ -1,0 +1,137 @@
+import { STAGE } from '../core/state.js';
+import { emit } from '../core/events.js';
+
+export function initInteraction({ reader, state, popover, positionEngine }) {
+
+  function clearSentence() {
+    if (state.activeSentence) {
+      state.activeSentence.classList.remove("active");
+    }
+    state.activeSentence = null;
+    state.currentWords = null;
+  }
+
+  function clearWord() {
+    if (state.activeWord) {
+      state.activeWord.classList.remove("active");
+    }
+    state.activeWord = null;
+  }
+
+  reader.addEventListener("click", e => {
+
+    if (state.isDestroyed) return;
+
+    // Ignore clicks inside popup
+    if (popover.element.contains(e.target)) return;
+
+    const target =
+      e.target.nodeType === Node.TEXT_NODE
+        ? e.target.parentElement
+        : e.target;
+
+    if (!target) return;
+
+    const sentence = target.closest(".sentence");
+
+    /* ======================================================
+       CLICK OUTSIDE → RESET
+    ====================================================== */
+
+    if (!sentence) {
+      popover.hide();
+      state.clickStage = STAGE.NONE;
+
+      clearSentence();
+      clearWord();
+
+      state.lastWordEl = null;
+      return;
+    }
+
+    const word = target.closest(".word");
+
+    /* ======================================================
+       1️⃣ SELECT SENTENCE
+    ====================================================== */
+
+    if (state.activeSentence !== sentence) {
+
+      clearSentence();
+      clearWord();
+
+      sentence.classList.add("active");
+
+      state.activeSentence = sentence;
+      state.currentWords = Array.from(
+        sentence.querySelectorAll(".word")
+      );
+
+      state.clickStage = STAGE.SENTENCE;
+      state.lastWordEl = null;
+
+      popover.hide();
+
+      emit("sentence:selected", sentence);
+      return;
+    }
+
+    if (!word) return;
+
+    /* ======================================================
+       2️⃣ SELECT WORD
+    ====================================================== */
+
+    if (word !== state.lastWordEl) {
+
+      clearWord();
+
+      word.classList.add("active");
+
+      state.activeWord = word;
+      state.lastWordEl = word;
+
+      state.clickStage = STAGE.WORD;
+
+      popover.hide();
+
+      emit("word:selected", word);
+      return;
+    }
+
+    /* ======================================================
+       3️⃣ OPEN POPUP (LOOKUP HAPPENS INSIDE POPOVER)
+    ====================================================== */
+
+    if (state.clickStage === STAGE.WORD) {
+
+      state.clickStage = STAGE.POPUP;
+
+      popover.show(word, positionEngine.position);
+
+      emit("popup:shown", { word });
+    }
+  });
+
+  /* ======================================================
+     REPOSITION ON SCROLL / RESIZE
+  ====================================================== */
+
+  function reposition() {
+    if (state.activeWord && popover.isVisible()) {
+      positionEngine.position(state.activeWord);
+    }
+  }
+
+  window.addEventListener("scroll", reposition);
+  window.addEventListener("resize", reposition);
+
+  return {
+    destroy() {
+      state.isDestroyed = true;
+
+      window.removeEventListener("scroll", reposition);
+      window.removeEventListener("resize", reposition);
+    }
+  };
+}

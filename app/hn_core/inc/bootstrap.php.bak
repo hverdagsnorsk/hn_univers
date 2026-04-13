@@ -1,0 +1,126 @@
+<?php
+declare(strict_types=1);
+
+/* ==========================================================
+   ERROR LOGGING
+========================================================== */
+
+$logDir  = dirname(__DIR__, 3) . '/logs';
+$logFile = $logDir . '/php_error.log';
+
+if (!is_dir($logDir)) {
+    @mkdir($logDir, 0775, true);
+}
+
+ini_set('log_errors', '1');
+ini_set('error_log', $logFile);
+error_reporting(E_ALL);
+
+
+/* ==========================================================
+   BOOTSTRAP GUARD
+========================================================== */
+
+if (defined('HN_BOOTSTRAPPED')) {
+    return;
+}
+
+define('HN_BOOTSTRAPPED', true);
+
+
+/* ==========================================================
+   PATHS
+========================================================== */
+
+define('HN_ROOT', dirname(__DIR__, 3));     // /www
+define('HN_APP_ROOT', HN_ROOT . '/app');    // /www/app
+
+define('HN_CORE', HN_APP_ROOT . '/hn_core');
+
+
+/* ==========================================================
+   AUTOLOAD
+========================================================== */
+
+$autoload = HN_APP_ROOT . '/vendor/autoload.php';
+
+if (!is_file($autoload)) {
+    throw new RuntimeException('Autoload not found: ' . $autoload);
+}
+
+require_once $autoload;
+
+
+/* ==========================================================
+   LOAD ENV (FØRST)
+========================================================== */
+
+use HnCore\Env\EnvLoader;
+
+$envPath = HN_ROOT . '/.env';
+
+if (!is_file($envPath)) {
+    throw new RuntimeException('.env not found: ' . $envPath);
+}
+
+EnvLoader::load($envPath);
+
+
+/* ==========================================================
+   ENV HELPER (GLOBAL)
+========================================================== */
+
+require_once HN_CORE . '/env.php';
+
+
+/* ==========================================================
+   HELPERS
+========================================================== */
+
+require_once HN_CORE . '/inc/helpers/cache.php';
+require_once HN_CORE . '/inc/helpers/html.php';
+require_once HN_CORE . '/inc/helpers/view.php';
+
+
+/* ==========================================================
+   SESSION
+========================================================== */
+
+if (php_sapi_name() !== 'cli') {
+
+    if (session_status() === PHP_SESSION_NONE) {
+
+        session_start([
+            'cookie_httponly' => true,
+            'cookie_secure'   => !empty($_SERVER['HTTPS']),
+            'use_strict_mode' => true,
+            'cookie_samesite' => 'Lax'
+        ]);
+    }
+}
+
+
+/* ==========================================================
+   DATABASE
+========================================================== */
+
+require_once HN_CORE . '/src/Database/db.php';
+
+
+/* ==========================================================
+   APP BOOT
+========================================================== */
+
+HnCore\Bootstrap\App::boot();
+
+
+/* ==========================================================
+   BASE PATHS
+========================================================== */
+
+defined('HN_BASE')        || define('HN_BASE', '');
+defined('HN_COURSE_BASE')|| define('HN_COURSE_BASE', '/hn_courses');
+defined('HN_BOOKS_BASE') || define('HN_BOOKS_BASE', '/hn_books');
+defined('HN_LEX_BASE')   || define('HN_LEX_BASE', '/hn_lex');
+defined('HN_FLASH_BASE') || define('HN_FLASH_BASE', '/hn_flash');
+defined('HN_ADMIN_BASE') || define('HN_ADMIN_BASE', '/hn_admin');

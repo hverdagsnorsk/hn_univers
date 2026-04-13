@@ -1,0 +1,120 @@
+/* ==========================================================
+   DESIGN TOKENS
+========================================================== */
+
+:root {
+
+    --color-primary: #2f8485;
+    --color-primary-hover: #266e6f;
+
+    --color-success: #0f6b5c;
+    --color-warning: #9a5c00;
+    --color-error: #b42318;
+    --color-neutral: #475467;
+
+    --bg-success: #e6f6f2;
+    --bg-warning: #fff4e5;
+    --bg-error: #fde8e8;
+    --bg-neutral: #f2f4f7;
+
+    --bg-main: #f7f9f9;
+    --bg-surface: #ffffff;
+    --border: #e6ecec;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+
+    --shadow-sm: 0 6px 18px rgba(0,0,0,.04);
+    --shadow-md: 0 12px 36px rgba(0,0,0,.06);
+
+    --container-width: 1240px;
+}
+
+/* ==========================================================
+   TYPOGRAPHY SYSTEM
+========================================================== */
+
+:root {
+    --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 2rem;
+    --text-4xl: 2.5rem;
+
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-loose: 1.7;
+}
+
+/* Base */
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Headings */
+
+h1, .h1 {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.6em;
+}
+
+h2, .h2 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    margin-bottom: 0.6em;
+}
+
+h3, .h3 {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: 0.4em;
+}
+
+h4, .h4 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 0.4em;
+}
+
+/* Paragraph */
+
+p {
+    margin-bottom: 1em;
+}
+
+/* Small / Meta */
+
+.small,
+.meta {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+}
+
+/* Muted */
+
+.muted {
+    color: var(--color-muted);
+}
+
+/* Strong highlight */
+
+.lead {
+    font-size: var(--text-lg);
+    line-height: var(--leading-loose);
+    font-weight: 500;
+}

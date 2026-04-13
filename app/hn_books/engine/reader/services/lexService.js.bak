@@ -1,0 +1,163 @@
+/* ======================================================
+   IMPORTS
+====================================================== */
+
+import { normalizeWord } from "../util/norwegian.js";
+
+
+/* ======================================================
+   FACTORY
+====================================================== */
+
+export function createLexService(config = {}, logger = null) {
+
+  const endpoint = config.endpoint || "/hn_lex/api/lookup.php";
+
+  const cache = new Map();
+
+
+  /* ======================================================
+     LOGGER
+  ====================================================== */
+
+  const logInfo =
+    typeof logger?.info === "function"
+      ? logger.info.bind(logger)
+      : () => {};
+
+  const logWarn =
+    typeof logger?.warn === "function"
+      ? logger.warn.bind(logger)
+      : console.warn;
+
+
+  /* ======================================================
+     FETCH WITH TIMEOUT
+  ====================================================== */
+
+  function fetchWithTimeout(url, options = {}, ms = 4000) {
+
+    const controller = new AbortController();
+
+    const timer = setTimeout(() => controller.abort(), ms);
+
+    return fetch(url, {
+      ...options,
+      signal: controller.signal
+    }).finally(() => clearTimeout(timer));
+  }
+
+
+  /* ======================================================
+     CACHE KEY
+  ====================================================== */
+
+  function buildCacheKey(word, contextObj) {
+    return [
+      word,
+      contextObj.sentence || "",
+      contextObj.prev || "",
+      contextObj.next || "",
+      contextObj.word_index ?? ""
+    ].join("|");
+  }
+
+
+  /* ======================================================
+     BUILD QUERY PARAMS
+  ====================================================== */
+
+  function buildQuery(word, contextObj) {
+
+    return new URLSearchParams({
+      word: word,
+      prev: contextObj.prev || "",
+      next: contextObj.next || "",
+      sentence: contextObj.sentence || "",
+      paragraph: contextObj.paragraph || "",
+
+      // nytt, men bakoverkompatibelt
+      word_index: contextObj.word_index ?? "",
+      tokens: JSON.stringify(contextObj.tokens || []),
+
+      lang: "nb",
+      level: "A2"
+    }).toString();
+  }
+
+
+  /* ======================================================
+     LOOKUP
+  ====================================================== */
+
+  async function lookupWord(word, contextObj = {}) {
+
+    if (!word) return { found: false };
+
+    const clean = normalizeWord(word);
+    if (!clean) return { found: false };
+
+    const cacheKey = buildCacheKey(clean, contextObj);
+
+    if (cache.has(cacheKey)) {
+      return cache.get(cacheKey);
+    }
+
+    const query = buildQuery(clean, contextObj);
+
+    const MAX_ATTEMPTS = 5;
+    const BASE_DELAY = 300;
+
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+
+      try {
+
+        const res = await fetchWithTimeout(
+          `${endpoint}?${query}`,
+          { method: "GET" }
+        );
+
+        if (!res.ok) {
+          logWarn("LEX HTTP ERROR", res.status);
+          return { found: false };
+        }
+
+        const data = await res.json();
+
+        if (data?.found) {
+          cache.set(cacheKey, data);
+          logInfo("LEX FOUND", clean, { attempt });
+          return data;
+        }
+
+        if (data?.queued) {
+          logInfo("LEX QUEUED", clean, { attempt });
+          await new Promise(r => setTimeout(r, BASE_DELAY * attempt));
+          continue;
+        }
+
+        logWarn("LEX NOT FOUND", clean);
+        return data || { found: false };
+
+      } catch (err) {
+
+        if (err.name === "AbortError") {
+          logWarn("LEX TIMEOUT", clean);
+        } else {
+          logWarn("LEX ERROR", err);
+        }
+
+        if (attempt === MAX_ATTEMPTS) {
+          return { found: false };
+        }
+      }
+    }
+
+    return { found: false };
+  }
+
+
+  return {
+    lookupWord
+  };
+}

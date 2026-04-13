@@ -1,0 +1,395 @@
+/* ==========================================================
+   HN ADMIN – UNIFIED DESIGN SYSTEM
+   Version 3.1 – Cleaned + Video UI
+========================================================== */
+
+/* ==========================================================
+   DESIGN TOKENS
+========================================================== */
+
+:root {
+
+    --hn-primary: #2f8485;
+    --hn-primary-hover: #256e6f;
+    --hn-secondary: #3C6464;
+    --hn-soft: #9AC5C5;
+
+    --hn-bg: #F6F8F8;
+    --hn-card: #ffffff;
+    --hn-border: #D0D3D3;
+    --hn-text: #484042;
+    --hn-text-muted: #6f6769;
+
+    --hn-shadow-sm: 0 4px 10px rgba(0,0,0,.04);
+    --hn-shadow-md: 0 12px 28px rgba(0,0,0,.06);
+    --hn-shadow-lg: 0 20px 50px rgba(0,0,0,.08);
+
+    --hn-radius-sm: 12px;
+    --hn-radius-md: 18px;
+    --hn-radius-lg: 26px;
+}
+
+
+/* ==========================================================
+   BASE ADMIN PAGE
+========================================================== */
+
+.page.admin-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px 70px;
+}
+
+.page.admin-page .page-header {
+    margin-bottom: 40px;
+}
+
+.page.admin-page h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--hn-secondary);
+}
+
+.page-intro {
+    color: var(--hn-text-muted);
+    font-size: 1.05rem;
+}
+
+
+/* ==========================================================
+   SECTION CARDS
+========================================================== */
+
+.admin-card-section {
+    background: var(--hn-card);
+    padding: 30px 32px;
+    border-radius: var(--hn-radius-md);
+    margin-bottom: 40px;
+    border: 1px solid var(--hn-border);
+    box-shadow: var(--hn-shadow-sm);
+}
+
+.admin-card-section h2 {
+    margin: 0 0 22px;
+    font-size: 1.2rem;
+    color: var(--hn-primary);
+}
+
+.admin-card-section h3 {
+    margin-top: 28px;
+    margin-bottom: 14px;
+    color: var(--hn-secondary);
+}
+
+
+/* ==========================================================
+   GRID (COURSE INDEX)
+========================================================== */
+
+.admin-course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 26px;
+}
+
+.admin-course-card {
+    background: var(--hn-card);
+    border-radius: var(--hn-radius-lg);
+    padding: 26px;
+    border: 1px solid var(--hn-border);
+    box-shadow: var(--hn-shadow-sm);
+    transition: .2s ease;
+}
+
+.admin-course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--hn-shadow-md);
+}
+
+.admin-course-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    color: var(--hn-secondary);
+}
+
+.admin-course-card p {
+    font-size: .95rem;
+    color: var(--hn-text-muted);
+    margin: 0 0 18px;
+}
+
+
+/* ==========================================================
+   BUTTON SYSTEM
+========================================================== */
+
+.hn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: var(--hn-radius-sm);
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--hn-primary);
+    color: white;
+    transition: .15s ease;
+}
+
+.hn-btn:hover {
+    background: var(--hn-primary-hover);
+    transform: translateY(-2px);
+}
+
+.hn-btn.secondary {
+    background: #eef2f3;
+    color: var(--hn-text);
+}
+
+.hn-btn.secondary:hover {
+    background: var(--hn-soft);
+}
+
+
+/* ==========================================================
+   TABLE SYSTEM
+========================================================== */
+
+.admin-table-wrap {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--hn-radius-md);
+    overflow: hidden;
+    box-shadow: var(--hn-shadow-sm);
+    background: #fff;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    margin: 0;
+}
+
+.admin-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--hn-primary);
+    color: #fff;
+    font-weight: 650;
+    font-size: .9rem;
+    padding: 14px 16px;
+}
+
+.admin-table tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    vertical-align: middle;
+    font-size: .95rem;
+}
+
+.admin-table tbody tr:nth-child(even) td {
+    background: rgba(246, 248, 248, 0.55);
+}
+
+.admin-table tbody tr:hover td {
+    background: rgba(154, 197, 197, 0.18);
+}
+
+.admin-table .text-title {
+    font-weight: 700;
+}
+
+.admin-table .text-meta {
+    font-size: .85rem;
+    color: rgba(0,0,0,0.60);
+}
+
+.admin-table .text-path {
+    font-size: .85rem;
+    color: rgba(0,0,0,0.55);
+}
+
+.admin-table .actions-col {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.small-btn {
+    padding: 7px 12px;
+    font-size: .85rem;
+}
+
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-success { background: #d1fae5; color: #065f46; }
+.badge-warning { background: #fef3c7; color: #92400e; }
+.badge-danger { background: #fee2e2; color: #991b1b; }
+.badge-muted { background: #e5e7eb; color: #374151; }
+
+
+/* ==========================================================
+   FORM SYSTEM
+========================================================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--hn-radius-sm);
+    border: 1px solid var(--hn-border);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--hn-primary);
+    box-shadow: 0 0 0 4px rgba(47,132,133,.15);
+}
+
+
+/* ==========================================================
+   VIDEO COMPONENTS
+========================================================== */
+
+.admin-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 22px;
+    margin-top: 20px;
+}
+
+.admin-video-card {
+    background: var(--hn-card);
+    border-radius: var(--hn-radius-md);
+    border: 1px solid var(--hn-border);
+    box-shadow: var(--hn-shadow-sm);
+    overflow: hidden;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.admin-video-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hn-shadow-md);
+}
+
+.admin-video-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+.admin-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    color: white;
+    background: rgba(0,0,0,.35);
+}
+
+.admin-video-body {
+    padding: 16px 18px;
+}
+
+.admin-video-title {
+    font-weight: 600;
+    color: var(--hn-secondary);
+    margin-bottom: 10px;
+}
+
+.admin-video-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 980px) {
+
+    .admin-video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table {
+        table-layout: auto;
+    }
+
+    .admin-table .actions-col {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .page.admin-page {
+        padding: 28px 16px 40px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 12px;
+    }
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: #eee;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.tab.active {
+    background: #2f6f6f;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

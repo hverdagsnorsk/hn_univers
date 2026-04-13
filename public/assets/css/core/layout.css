@@ -1,0 +1,123 @@
+/* ==========================================================
+   TOPBAR
+========================================================== */
+
+.hn-topbar {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.hn-topbar__inner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.hn-logo img {
+    height: 42px;
+    display: block;
+}
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+.hn-nav {
+    display: flex;
+    gap: 28px;
+}
+
+.hn-nav a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #374151;
+    padding: 6px 0;
+    position: relative;
+    transition: color .2s ease;
+}
+
+/* Underline animation */
+
+.hn-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width .2s ease;
+}
+
+.hn-nav a:hover {
+    color: var(--color-primary);
+}
+
+.hn-nav a:hover::after {
+    width: 100%;
+}
+
+.hn-nav a.active {
+    color: var(--color-primary);
+}
+
+.hn-nav a.active::after {
+    width: 100%;
+}
+
+/* ==========================================================
+   MAIN CONTAINER
+========================================================== */
+
+.hn-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.hn-footer {
+    margin-top: 80px;
+    padding: 40px 20px;
+    border-top: 1px solid var(--color-border);
+    background: #ffffff;
+}
+
+.hn-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    text-align: center;
+}
+
+.hn-footer-logo {
+    height: 40px;
+    opacity: .85;
+}
+
+.hn-footer-meta {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+}
+
+.hn-footer-divider {
+    margin: 0 8px;
+    opacity: .6;
+}

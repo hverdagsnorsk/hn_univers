@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Hvis fil eller mappe finnes → bruk den direkte
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Ellers → send alt til index.php
+RewriteRule ^ index.php [QSA,L]

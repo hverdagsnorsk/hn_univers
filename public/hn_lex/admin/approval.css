@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 20px;
+    color: #2c3e50;
+}
+
+/* GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 20px;
+    align-items: start; /* 🔴 KRITISK */
+}
+
+/* CARD */
+
+.card {
+    display: flex;                /* 🔴 KRITISK */
+    flex-direction: column;       /* 🔴 KRITISK */
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+}
+
+/* FORM */
+
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* FORM ELEMENTS */
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #34495e;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 4px;
+    border: 1px solid #dcdfe3;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* TEXTAREA */
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* SENSE BLOCK */
+
+.sense {
+    border: 1px solid #e2e6ea;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 8px;
+    background: #fafbfc;
+}
+
+/* SENSE HEADER */
+
+.sense-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* BADGE */
+
+.badge {
+    background: #2c3e50;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+/* SENSE INDEX */
+
+.sense-index {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+/* ACTIONS */
+
+.actions {
+    margin-top: auto;   /* 🔴 PRESER BUTTONENE NED */
+    padding-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* BUTTONS */
+
+button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    background: #3498db;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* REJECT BUTTON */
+
+.danger {
+    background: #c0392b;
+}
+
+/* PREVIEW BOX */
+
+.preview-box {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f4f6f8;
+    border-radius: 6px;
+    font-size: 13px;
+    border: 1px solid #e5e7eb;
+}
+
+/* SEPARATOR */
+
+hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* HEADINGS */
+
+h1 {
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}

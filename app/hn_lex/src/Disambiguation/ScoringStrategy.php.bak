@@ -1,0 +1,230 @@
+<?php
+declare(strict_types=1);
+
+namespace HnLex\Disambiguation;
+
+use HnLex\Service\EmbeddingService;
+use HnLex\Service\LexLearningService;
+use Throwable;
+
+final class ScoringStrategy
+{
+    private const DETERMINERS = ['en','ei','et','den','det','de'];
+    private const PRONOUNS    = ['jeg','du','han','hun','vi','dere','de','man'];
+    private const PREPOSITIONS = ['i','på','til','for','med','av','om','hos','over','under'];
+
+    private const AUXILIARIES = [
+        'skal','vil','kan','må','bør','har','hadde','får','fikk'
+    ];
+
+    public function __construct(
+        private ?EmbeddingService $embedding,
+        private LexLearningService $learning
+    ) {}
+
+    /* ==========================================================
+       MAIN ENTRY
+    ========================================================== */
+
+    public function score(array $candidates, array $context): array
+    {
+        if (empty($candidates)) {
+            return [];
+        }
+
+        if (count($candidates) === 1) {
+            $candidates[0]['_score'] = 100;
+            return $candidates;
+        }
+
+        $prev     = $this->norm($context['prev'] ?? '');
+        $next     = $this->norm($context['next'] ?? '');
+        $sentence = $this->norm($context['sentence'] ?? '');
+        $word     = $this->norm($context['word'] ?? '');
+
+        $contextEmbedding = $context['embedding'] ?? null;
+
+        $scored = [];
+
+        foreach ($candidates as $cand) {
+
+            $score = 0;
+            $wordClass = $cand['word_class'] ?? 'unknown';
+            $senseId   = (int)($cand['sense_id'] ?? 0);
+
+            /* ======================================================
+               1. MATCH TYPE
+            ====================================================== */
+
+            if (!empty($cand['matched_field'])) {
+
+                if ($cand['matched_field'] === 'form') {
+                    $score += 60;
+                }
+
+                if ($cand['matched_field'] === 'lemma') {
+                    $score += 10;
+                }
+            }
+
+            /* ======================================================
+               2. GRAMMAR SIGNALS
+            ====================================================== */
+
+            if ($prev === 'å' && $wordClass === 'verb') {
+                $score += 100;
+            }
+
+            if (in_array($prev, self::AUXILIARIES, true) && $wordClass === 'verb') {
+                $score += 80;
+            }
+
+            if (in_array($prev, self::PRONOUNS, true) && $wordClass === 'verb') {
+                $score += 50;
+            }
+
+            if (in_array($prev, self::DETERMINERS, true) && $wordClass === 'substantiv') {
+                $score += 50;
+            }
+
+            if (in_array($prev, self::PREPOSITIONS, true) && $wordClass === 'substantiv') {
+                $score += 30;
+            }
+
+            /* ======================================================
+               3. SENTENCE CONTEXT
+            ====================================================== */
+
+            if ($sentence !== '') {
+
+                if ($wordClass === 'verb' && str_contains($sentence, 'jeg ' . $word)) {
+                    $score += 20;
+                }
+
+                if ($wordClass === 'substantiv' && str_contains($sentence, 'en ' . $word)) {
+                    $score += 15;
+                }
+            }
+
+            /* ======================================================
+               4. STRUCTURE
+            ====================================================== */
+
+            if ($wordClass === 'verb') {
+
+                if ($next === 'ikke') {
+                    $score += 25;
+                }
+
+                if (
+                    $next !== '' &&
+                    !in_array($next, self::PREPOSITIONS, true) &&
+                    !in_array($next, self::DETERMINERS, true)
+                ) {
+                    $score += 15;
+                }
+            }
+
+            if ($wordClass === 'substantiv' && $this->looksLikeAdjective($prev)) {
+                $score += 20;
+            }
+
+            /* ======================================================
+               5. MORPHOLOGY
+            ====================================================== */
+
+            if ($wordClass === 'verb') {
+
+                if (str_ends_with($word, 'er')) {
+                    $score += 15;
+                }
+
+                if (str_ends_with($word, 'e')) {
+                    $score += 10;
+                }
+            }
+
+            if ($wordClass === 'substantiv') {
+
+                if (
+                    str_ends_with($word, 'er') ||
+                    str_ends_with($word, 'ene')
+                ) {
+                    $score += 10;
+                }
+            }
+
+            /* ======================================================
+               6. EMBEDDING
+            ====================================================== */
+
+            if (
+                $this->embedding &&
+                !empty($cand['embedding']) &&
+                !empty($contextEmbedding)
+            ) {
+                try {
+                    $similarity = $this->embedding->cosine(
+                        $contextEmbedding,
+                        $cand['embedding']
+                    );
+
+                    $score += (int) round($similarity * 80);
+
+                } catch (Throwable) {}
+            }
+
+            /* ======================================================
+               7. LEARNING BOOST (NYTT – KRITISK)
+            ====================================================== */
+
+            if ($senseId > 0) {
+                $score += $this->learning->getBoost(
+                    $word,
+                    $prev,
+                    $next,
+                    $senseId
+                );
+            }
+
+            /* ======================================================
+               8. LEMMA MATCH
+            ====================================================== */
+
+            if (!empty($cand['lemma']) && $cand['lemma'] === $word) {
+                $score += 5;
+            }
+
+            $score += 1;
+
+            $cand['_score'] = $score;
+            $scored[] = $cand;
+        }
+
+        usort($scored, fn($a, $b) => $b['_score'] <=> $a['_score']);
+
+        return $scored;
+    }
+
+    /* ==========================================================
+       HELPERS
+    ========================================================== */
+
+    private function looksLikeAdjective(string $word): bool
+    {
+        if ($word === '') return false;
+
+        foreach (['e','t','ig','lig','isk'] as $end) {
+            if (str_ends_with($word, $end)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function norm(string $word): string
+    {
+        return mb_strtolower(trim($word));
+    }
+}

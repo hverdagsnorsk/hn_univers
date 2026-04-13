@@ -1,0 +1,7 @@
+.env
+/vendor/
+node_modules/
+*.log
+/cache/
+/tmp/
+*_backup/.env

@@ -1,0 +1,17 @@
+.hn-mode--portal main {
+  max-width: var(--hn-max-width);
+  margin: -40px auto 60px;
+  padding: 0 20px;
+}
+
+.hn-mode--learning main {
+  max-width: var(--hn-max-width);
+  margin: -32px auto 60px;
+  padding: 0 20px;
+}
+
+.hn-mode--focus main {
+  max-width: var(--hn-text-width);
+  margin: 32px auto 60px;
+  padding: 0 16px;
+}

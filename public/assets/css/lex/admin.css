@@ -1,0 +1,62 @@
+/* =========================================
+   HN LEX – ADMIN
+========================================= */
+
+.hn-admin .hn-explanation-block {
+    border: 1px solid var(--hn-border);
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    background: #fafbfc;
+}
+
+.hn-admin h1 {
+    font-weight: 600;
+}
+
+/* Smalere grid for grammar */
+.hn-admin .hn-card .hn-grid-2 input {
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   INFLECTION TABLE
+========================================= */
+
+.hn-inflection-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.hn-inflection-table th,
+.hn-inflection-table td {
+    padding: 0.6rem 0.7rem;
+    border: 1px solid var(--hn-border);
+    text-align: left;
+}
+
+.hn-inflection-table thead th {
+    background: #f4f6f7;
+    font-weight: 600;
+}
+
+.hn-inflection-table tbody th {
+    width: 140px;
+    background: #fafbfc;
+    font-weight: 500;
+}
+
+.hn-inflection-table input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 0.4rem 0.3rem;
+}
+
+.hn-inflection-table input:focus {
+    outline: none;
+    background: #fff;
+    border: 1px solid var(--hn-primary);
+    border-radius: 6px;
+}

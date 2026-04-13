@@ -1,0 +1,77 @@
+function splitSentences(text) {
+  return text
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/);
+}
+
+function tokenize(sentence) {
+  return sentence.match(/\p{L}+|\p{N}+|\s+|[^\s]/gu) || [];
+}
+
+function processTextNode(node) {
+
+  const text = node.nodeValue;
+
+  if (!text || !text.trim()) return;
+
+  const sentences = splitSentences(text);
+
+  const frag = document.createDocumentFragment();
+
+  sentences.forEach(s => {
+
+    const sSpan = document.createElement("span");
+    sSpan.className = "sentence";
+
+    const tokens = tokenize(s);
+
+    tokens.forEach(token => {
+
+      if (/^\s+$/.test(token)) {
+
+        sSpan.appendChild(
+          document.createTextNode(token)
+        );
+
+      } else {
+
+        const w = document.createElement("span");
+
+        w.className = "word";
+        w.textContent = token;
+
+        sSpan.appendChild(w);
+
+      }
+
+    });
+
+    frag.appendChild(sSpan);
+    frag.appendChild(document.createTextNode(" "));
+
+  });
+
+  node.replaceWith(frag);
+}
+
+
+/* 🔥 DET DU MANGLER */
+export function processDOM(root, state) {
+
+  const walker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_TEXT,
+    null
+  );
+
+  const nodes = [];
+
+  let node;
+
+  while (node = walker.nextNode()) {
+    nodes.push(node);
+  }
+
+  nodes.forEach(processTextNode);
+
+}

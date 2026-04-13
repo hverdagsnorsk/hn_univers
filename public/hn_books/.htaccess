@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# 🔥 IKKE rør assets
+RewriteCond %{REQUEST_URI} ^/assets/ [NC]
+RewriteRule ^ - [L]
+
+# hn_books router
+RewriteCond %{REQUEST_URI} ^/hn_books
+RewriteRule ^hn_books/?(.*)$ /hn_books/router.php [L,QSA]
